@@ -44,7 +44,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function getCurrentToken(): \Dissect\Lexer\Token
+    public function getCurrentToken(): Token
     {
         return $this->tokens[$this->position];
     }
@@ -52,7 +52,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function lookAhead(int $n): \Dissect\Lexer\Token
+    public function lookAhead(int $n): Token
     {
         if (isset($this->tokens[$this->position + $n])) {
             return $this->tokens[$this->position + $n];
@@ -64,7 +64,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function get(int $n): \Dissect\Lexer\Token
+    public function get(int $n): Token
     {
         if (isset($this->tokens[$n])) {
             return $this->tokens[$n];
@@ -120,7 +120,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * @return ArrayIterator
      */
-    public function getIterator(): \ArrayIterator
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->tokens);
     }

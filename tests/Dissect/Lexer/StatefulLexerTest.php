@@ -4,13 +4,14 @@ namespace Dissect\Lexer;
 
 use Dissect\Lexer\Recognizer\RegexRecognizer;
 use Dissect\Lexer\Recognizer\SimpleRecognizer;
-use PHPUnit_Framework_TestCase;
+use LogicException;
+use PHPUnit\Framework\TestCase;
 
-class StatefulLexerTest extends PHPUnit_Framework_TestCase
+class StatefulLexerTest extends TestCase
 {
     protected $lexer;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->lexer = new StatefulLexer();
     }
@@ -22,6 +23,9 @@ class StatefulLexerTest extends PHPUnit_Framework_TestCase
      */
     public function addingNewTokenShouldThrowAnExceptionWhenNoStateIsBeingBuilt()
     {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Define a lexer state first.');
+
         $this->lexer->regex('WORD', '/[a-z]+/');
     }
 
@@ -31,6 +35,9 @@ class StatefulLexerTest extends PHPUnit_Framework_TestCase
      */
     public function anExceptionShouldBeThrownOnLexingWithoutAStartingState()
     {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('You must set a starting state before lexing.');
+
         $this->lexer->state('root');
         $this->lexer->lex('foo');
     }

@@ -3,9 +3,9 @@
 namespace Dissect\Parser\LALR1\Analysis;
 
 use Dissect\Parser\Rule;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class StateTest extends PHPUnit_Framework_TestCase
+class StateTest extends TestCase
 {
     /**
      * @test

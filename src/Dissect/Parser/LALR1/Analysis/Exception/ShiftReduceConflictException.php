@@ -68,7 +68,7 @@ EOT;
      *
      * @return Rule The conflicting rule.
      */
-    public function getRule(): \Dissect\Parser\Rule
+    public function getRule(): Rule
     {
         return $this->rule;
     }

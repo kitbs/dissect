@@ -18,7 +18,7 @@ class ConflictException extends LogicException
      */
     protected $state;
     /**
-     * @var \Dissect\Parser\LALR1\Analysis\Automaton
+     * @var Automaton
      */
     protected $automaton;
 
@@ -43,9 +43,9 @@ class ConflictException extends LogicException
     /**
      * Returns the faulty automaton.
      *
-     * @return \Dissect\Parser\LALR1\Analysis\Automaton
+     * @return Automaton
      */
-    public function getAutomaton(): \Dissect\Parser\LALR1\Analysis\Automaton
+    public function getAutomaton(): Automaton
     {
         return $this->automaton;
     }

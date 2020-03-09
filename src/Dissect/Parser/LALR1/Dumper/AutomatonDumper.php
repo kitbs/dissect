@@ -15,7 +15,7 @@ use Dissect\Parser\LALR1\Analysis\State;
 class AutomatonDumper
 {
     /**
-     * @var \Dissect\Parser\LALR1\Analysis\Automaton
+     * @var Automaton
      */
     protected $automaton;
 

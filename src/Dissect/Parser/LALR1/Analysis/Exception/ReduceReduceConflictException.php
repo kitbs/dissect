@@ -84,7 +84,7 @@ EOT;
      *
      * @return Rule The first conflicting rule.
      */
-    public function getFirstRule(): \Dissect\Parser\Rule
+    public function getFirstRule(): Rule
     {
         return $this->firstRule;
     }
@@ -94,7 +94,7 @@ EOT;
      *
      * @return Rule The second conflicting rule.
      */
-    public function getSecondRule(): \Dissect\Parser\Rule
+    public function getSecondRule(): Rule
     {
         return $this->secondRule;
     }

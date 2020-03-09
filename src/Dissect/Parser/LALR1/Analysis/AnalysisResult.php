@@ -45,7 +45,7 @@ class AnalysisResult
      *
      * @return Automaton
      */
-    public function getAutomaton(): \Dissect\Parser\LALR1\Analysis\Automaton
+    public function getAutomaton(): Automaton
     {
         return $this->automaton;
     }

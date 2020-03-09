@@ -95,7 +95,7 @@ class Item
      *
      * @return Rule The rule.
      */
-    public function getRule(): \Dissect\Parser\Rule
+    public function getRule(): Rule
     {
         return $this->rule;
     }
@@ -119,7 +119,7 @@ class Item
     /**
      * Connects two items with a lookahead pumping channel.
      *
-     * @param \Dissect\Parser\LALR1\Analysis\Item $i The item.
+     * @param Item $i The item.
      */
     public function connect(Item $i): void
     {

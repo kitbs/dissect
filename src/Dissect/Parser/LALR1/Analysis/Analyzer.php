@@ -25,7 +25,7 @@ class Analyzer
      *
      * @return AnalysisResult The result ofthe analysis.
      */
-    public function analyze(Grammar $grammar): \Dissect\Parser\LALR1\Analysis\AnalysisResult
+    public function analyze(Grammar $grammar): AnalysisResult
     {
         $automaton = $this->buildAutomaton($grammar);
         [$parseTable, $conflicts] = $this->buildParseTable($automaton, $grammar);
@@ -40,7 +40,7 @@ class Analyzer
      *
      * @return Automaton The resulting automaton.
      */
-    protected function buildAutomaton(Grammar $grammar): \Dissect\Parser\LALR1\Analysis\Automaton
+    protected function buildAutomaton(Grammar $grammar): Automaton
     {
         // the eventual automaton
         $automaton = new Automaton();
@@ -66,9 +66,9 @@ class Analyzer
         $initialItem = new Item($grammar->getStartRule(), 0);
 
         // construct the initial state
-        $state = new State($kernelSet->insert([
+        $state = new State($kernelSet->insert(
             [$initialItem->getRule()->getNumber(), $initialItem->getDotIndex()],
-        ]), [$initialItem]);
+        ), [$initialItem]);
 
         // the initial item automatically has EOF
         // as its lookahead
@@ -210,7 +210,7 @@ class Analyzer
                     }
                 } else {
                     // new state needs to be created
-                    $newState = new State($num, array_map(function (Item $i): \Dissect\Parser\LALR1\Analysis\Item {
+                    $newState = new State($num, array_map(function (Item $i): Item {
                         $new = new Item($i->getRule(), $i->getDotIndex() + 1);
 
                         // connect the two items

@@ -28,7 +28,7 @@ class RegexRecognizer implements Recognizer
     /**
      * {@inheritDoc}
      */
-    public function match(string $string, string &$result): bool
+    public function match(?string $string, ?string &$result): bool
     {
         $r = preg_match($this->regex, $string, $match, PREG_OFFSET_CAPTURE);
 

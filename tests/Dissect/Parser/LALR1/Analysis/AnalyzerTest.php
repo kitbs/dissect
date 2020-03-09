@@ -5,11 +5,16 @@ namespace Dissect\Parser\LALR1\Analysis;
 use Dissect\Parser\LALR1\Analysis\Exception\ReduceReduceConflictException;
 use Dissect\Parser\Grammar;
 use Dissect\Parser\Parser;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AnalyzerTest extends PHPUnit_Framework_TestCase
+class AnalyzerTest extends TestCase
 {
     protected $analyzer = null;
+
+    public function setUp(): void
+    {
+        // $this->markTestSkipped('Skipped test');
+    }
 
     /**
      * @test

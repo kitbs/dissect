@@ -2,13 +2,13 @@
 
 namespace Dissect\Parser\LALR1\Analysis;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AutomatonTest extends PHPUnit_Framework_TestCase
+class AutomatonTest extends TestCase
 {
     protected $automaton;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->automaton = new Automaton();
         $this->automaton->addState(new State(0, []));

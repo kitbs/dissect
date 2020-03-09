@@ -49,7 +49,7 @@ class Automaton
      *
      * @return State The requested state.
      */
-    public function getState(int $number): \Dissect\Parser\LALR1\Analysis\State
+    public function getState(int $number): State
     {
         return $this->states[$number];
     }

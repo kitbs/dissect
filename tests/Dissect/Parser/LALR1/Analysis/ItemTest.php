@@ -3,9 +3,9 @@
 namespace Dissect\Parser\LALR1\Analysis;
 
 use Dissect\Parser\Rule;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ItemTest extends PHPUnit_Framework_TestCase
+class ItemTest extends TestCase
 {
     /**
      * @test
@@ -50,14 +50,16 @@ class ItemTest extends PHPUnit_Framework_TestCase
     {
         $item1 = new Item(new Rule(1, 'A', array('a', 'b', 'c')), 1);
 
-        $item2 = $this->getMock(
-            'Dissect\\Parser\\LALR1\\Analysis\\Item',
-            array('pump'),
-            array(
-                new Rule(1, 'A', array('a', 'b', 'c')),
-                2,
+        $item2 = $this->getMockBuilder(
+            'Dissect\\Parser\\LALR1\\Analysis\\Item'
             )
-        );
+            ->setMethods(['pump'])
+            ->setConstructorArgs(
+                [
+                    new Rule(1, 'A', array('a', 'b', 'c')),
+                    2,
+                ]
+            )->getMock();
 
         $item2->expects($this->once())
             ->method('pump')

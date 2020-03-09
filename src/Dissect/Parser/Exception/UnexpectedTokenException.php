@@ -61,7 +61,7 @@ EOT;
      *
      * @return Token The unexpected token.
      */
-    public function getToken(): \Dissect\Lexer\Token
+    public function getToken(): Token
     {
         return $this->token;
     }

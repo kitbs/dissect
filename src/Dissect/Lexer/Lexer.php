@@ -21,7 +21,7 @@ interface Lexer
      * @throws RecognitionException
      * When unable to extract more tokens from the string.
      *
-     * @return \Dissect\Lexer\TokenStream\TokenStream The resulting token stream.
+     * @return TokenStream The resulting token stream.
      */
     public function lex(string $string): TokenStream;
 }

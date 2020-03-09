@@ -15,7 +15,7 @@ class KernelSet
      */
     protected $nextNumber = 0;
     /**
-     * @var \Dissect\Parser\LALR1\Analysis\KernelSet\Node|null
+     * @var Node|null
      */
     protected $root = null;
 

@@ -4,13 +4,13 @@ namespace Dissect\Lexer;
 
 use Dissect\Lexer\Exception\RecognitionException;
 use Dissect\Parser\Parser;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AbstractLexerTest extends PHPUnit_Framework_TestCase
+class AbstractLexerTest extends TestCase
 {
     protected $lexer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->lexer = new StubLexer();
     }

@@ -12,7 +12,7 @@ use RuntimeException;
 class CommonNode implements Node
 {
     /**
-     * @var \Dissect\Node\Node[]
+     * @var Node[]Node
      */
     public $children;
     /**
@@ -59,7 +59,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function getNode($key): \Dissect\Node\Node
+    public function getNode($key): Node
     {
         if (!isset($this->children[$key])) {
             throw new RuntimeException(sprintf('No child node "%s" exists.', $key));

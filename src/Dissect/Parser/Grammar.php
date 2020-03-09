@@ -132,7 +132,18 @@ class Grammar
      */
     const NONASSOC = 2;
 
-    public function __invoke($nonterminal): self
+    public function __invoke(string $nonterminal): self
+    {
+        return $this->rule($nonterminal);
+    }
+
+    /**
+     * Add a rule.
+     *
+     * @param  string $nonterminal
+     * @return $this
+     */
+    public function rule(string $nonterminal): self
     {
         $this->currentNonterminal = $nonterminal;
 
@@ -142,13 +153,13 @@ class Grammar
     /**
      * Defines an alternative for a grammar rule.
      *
-     * @param string... The components of the rule.
+     * @param string[] ...$args The components of the rule.
      *
-     * @return \Dissect\Parser\Grammar This instance.
+     * @return Grammar This instance.
      */
-    public function is(): self
+    public function is(...$args): self
     {
-        $this->currentOperators = null;
+        $this->currentOperators = [];
 
         if ($this->currentNonterminal === null) {
             throw new LogicException(
@@ -158,13 +169,11 @@ class Grammar
 
         $num = $this->nextRuleNumber++;
 
-        $rule = new Rule($num, $this->currentNonterminal, func_get_args());
+        $rule = new Rule($num, $this->currentNonterminal, $args);
 
-        $this->rules[$num] = $this->groupedRules[$this->currentNonterminal][] =
-        $rule;
-        $this->currentRule =
-        $this->groupedRules[$this->currentNonterminal][] =
-        $rule;
+        $this->rules[$num] = $rule;
+        $this->groupedRules[$this->currentNonterminal][] = $rule;
+        $this->currentRule = $rule;
 
         return $this;
     }
@@ -174,7 +183,7 @@ class Grammar
      *
      * @param callable $callback The callback.
      *
-     * @return \Dissect\Parser\Grammar This instance.
+     * @return Grammar This instance.
      */
     public function call(callable $callback): self
     {
@@ -199,7 +208,7 @@ class Grammar
         return $this->rules;
     }
 
-    public function getRule($number): \Dissect\Parser\Rule
+    public function getRule($number): Rule
     {
         return $this->rules[$number];
     }
@@ -239,7 +248,7 @@ class Grammar
      *
      * @return Rule The start rule.
      */
-    public function getStartRule(): \Dissect\Parser\Rule
+    public function getStartRule(): Rule
     {
         if (!isset($this->rules[0])) {
             throw new LogicException("No start rule specified.");
@@ -285,7 +294,7 @@ class Grammar
      *
      * @param string,... Any number of tokens that serve as the operators.
      *
-     * @return \Dissect\Parser\Grammar This instance for fluent interface.
+     * @return Grammar This instance for fluent interface.
      */
     public function operators(): self
     {
@@ -308,9 +317,9 @@ class Grammar
     /**
      * Marks the current group of operators as left-associative.
      *
-     * @return \Dissect\Parser\Grammar This instance for fluent interface.
+     * @return Grammar This instance for fluent interface.
      */
-    public function left(): \Dissect\Parser\Grammar
+    public function left(): Grammar
     {
         return $this->assoc(self::LEFT);
     }
@@ -318,9 +327,9 @@ class Grammar
     /**
      * Marks the current group of operators as right-associative.
      *
-     * @return \Dissect\Parser\Grammar This instance for fluent interface.
+     * @return Grammar This instance for fluent interface.
      */
-    public function right(): \Dissect\Parser\Grammar
+    public function right(): Grammar
     {
         return $this->assoc(self::RIGHT);
     }
@@ -328,9 +337,9 @@ class Grammar
     /**
      * Marks the current group of operators as nonassociative.
      *
-     * @return \Dissect\Parser\Grammar This instance for fluent interface.
+     * @return Grammar This instance for fluent interface.
      */
-    public function nonassoc(): \Dissect\Parser\Grammar
+    public function nonassoc(): Grammar
     {
         return $this->assoc(self::NONASSOC);
     }
@@ -340,7 +349,7 @@ class Grammar
      *
      * @param int $a One of Grammar::LEFT, Grammar::RIGHT, Grammar::NONASSOC
      *
-     * @return \Dissect\Parser\Grammar This instance for fluent interface.
+     * @return Grammar This instance for fluent interface.
      */
     public function assoc(int $a): self
     {
@@ -362,7 +371,7 @@ class Grammar
      *
      * @param int $i The precedence as an integer.
      *
-     * @return \Dissect\Parser\Grammar This instance for fluent interface.
+     * @return Grammar This instance for fluent interface.
      */
     public function prec(int $i): self
     {

@@ -26,7 +26,7 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @return Token The current token.
      */
-    public function getCurrentToken(): \Dissect\Lexer\Token;
+    public function getCurrentToken(): Token;
 
     /**
      * Returns a look-ahead token. Negative values are allowed
@@ -38,7 +38,7 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @return Token The lookahead token.
      */
-    public function lookAhead(int $n): \Dissect\Lexer\Token;
+    public function lookAhead(int $n): Token;
 
     /**
      * Returns the token at absolute position $n.
@@ -49,7 +49,7 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @return Token The token at position $n.
      */
-    public function get(int $n): \Dissect\Lexer\Token;
+    public function get(int $n): Token;
 
     /**
      * Moves the cursor to the absolute position $n.

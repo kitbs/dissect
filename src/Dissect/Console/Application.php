@@ -7,6 +7,7 @@ use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * The CLI application.
@@ -29,7 +30,7 @@ class Application extends BaseApplication
     }
 
     /**
-     * @return \Symfony\Component\Console\Command\Command[]
+     * @return Command[]
      */
     protected function getDefaultCommands(): array
     {
@@ -39,7 +40,7 @@ class Application extends BaseApplication
         return $default;
     }
 
-    public function getDefinition(): \Symfony\Component\Console\Input\InputDefinition
+    public function getDefinition(): InputDefinition
     {
         return new InputDefinition([
             new InputOption('--help',    '-h', InputOption::VALUE_NONE, 'Display this help message.'),

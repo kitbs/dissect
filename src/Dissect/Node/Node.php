@@ -34,17 +34,17 @@ interface Node extends Countable, IteratorAggregate
      *
      * @param int|string $name The name of the node.
      *
-     * @return \Dissect\Node\Node The child node specified by $name.
+     * @return Node The child node specified by $name.
      *
      * @throws RuntimeException When no child node named $name exists.
      */
-    public function getNode($name): \Dissect\Node\Node;
+    public function getNode($name): Node;
 
     /**
      * Sets a child node.
      *
      * @param string $name The name.
-     * @param \Dissect\Node\Node $node The new child node.
+     * @param Node $node The new child node.
      */
     public function setNode(string $name, Node $child);
 

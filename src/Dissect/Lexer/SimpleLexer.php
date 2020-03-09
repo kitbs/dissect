@@ -32,7 +32,7 @@ class SimpleLexer extends AbstractLexer
      * @param string $type The token type.
      * @param string $value The value to be recognized.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return $this This instance for fluent interface.
      */
     public function token(string $type, string $value = null): self
     {
@@ -51,7 +51,7 @@ class SimpleLexer extends AbstractLexer
      * @param string $type The token type.
      * @param string $regex The regular expression used to match the token.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return $this This instance for fluent interface.
      */
     public function regex(string $type, string $regex): self
     {
@@ -65,7 +65,7 @@ class SimpleLexer extends AbstractLexer
      *
      * @param mixed $type ,... Unlimited number of token types.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return $this This instance for fluent interface.
      */
     public function skip(): self
     {

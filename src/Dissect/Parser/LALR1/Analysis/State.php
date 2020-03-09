@@ -59,7 +59,7 @@ class State
      *
      * @return Item The item.
      */
-    public function get(int $ruleNumber, int $dotIndex): \Dissect\Parser\LALR1\Analysis\Item
+    public function get(int $ruleNumber, int $dotIndex): Item
     {
         return $this->itemMap[$ruleNumber][$dotIndex];
     }

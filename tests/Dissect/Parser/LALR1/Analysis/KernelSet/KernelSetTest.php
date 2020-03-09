@@ -2,9 +2,9 @@
 
 namespace Dissect\Parser\LALR1\Analysis\KernelSet;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class KernelSetTest extends PHPUnit_Framework_TestCase
+class KernelSetTest extends TestCase
 {
     /**
      * @test

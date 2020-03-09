@@ -37,7 +37,7 @@ abstract class RegexLexer implements Lexer
         $oldPosition = 0;
 
         foreach ($matches as $match) {
-            list ($value, $position) = $match;
+            [$value, $position] = $match;
 
             $type = $this->getType($value);
 

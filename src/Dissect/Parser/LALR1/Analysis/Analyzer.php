@@ -28,7 +28,7 @@ class Analyzer
     public function analyze(Grammar $grammar)
     {
         $automaton = $this->buildAutomaton($grammar);
-        list($parseTable, $conflicts) = $this->buildParseTable($automaton, $grammar);
+        [$parseTable, $conflicts] = $this->buildParseTable($automaton, $grammar);
 
         return new AnalysisResult($parseTable, $automaton, $conflicts);
     }
@@ -88,7 +88,7 @@ class Analyzer
             // calculate closure
             $added = array();
             $currentItems = $state->getItems();
-            for ($x = 0; $x < count($currentItems); $x++) {
+            for ($x = 0; $x < (is_countable($currentItems) ? count($currentItems) : 0); $x++) {
                 $item = $currentItems[$x];
 
                 if (!$item->isReduceItem()) {
@@ -121,7 +121,7 @@ class Analyzer
                                 } else {
                                     // if it does
 
-                                    if ($i < (count($cs) - 1)) {
+                                    if ($i < ((is_countable($cs) ? count($cs) : 0) - 1)) {
                                         // if more components ahead, remove epsilon
                                         unset($new[array_search(Grammar::EPSILON, $new)]);
                                     }
@@ -375,8 +375,8 @@ class Analyzer
 
                                 if ($conflictsMode & Grammar::LONGER_REDUCE) {
 
-                                    $count1 = count($originalRule->getComponents());
-                                    $count2 = count($newRule->getComponents());
+                                    $count1 = is_countable($originalRule->getComponents()) ? count($originalRule->getComponents()) : 0;
+                                    $count2 = is_countable($newRule->getComponents()) ? count($newRule->getComponents()) : 0;
 
                                     if ($count1 > $count2) {
                                         // original rule is longer
@@ -499,7 +499,7 @@ class Analyzer
                                     // if all components derive epsilon,
                                     // the rule itself derives epsilon
 
-                                    if ($i < (count($components) - 1)) {
+                                    if ($i < ((is_countable($components) ? count($components) : 0) - 1)) {
                                         // more components ahead, remove epsilon
                                         unset($x[array_search(Grammar::EPSILON, $x)]);
                                     }

@@ -75,7 +75,7 @@ class Parser implements P\Parser
                 } elseif ($action < 0) {
                     // reduce
                     $rule = $this->grammar->getRule(-$action);
-                    $popCount = count($rule->getComponents());
+                    $popCount = is_countable($rule->getComponents()) ? count($rule->getComponents()) : 0;
 
                     $newArgs = $args;
 

@@ -68,7 +68,7 @@ class KernelSet
     public static function hashKernel(array $kernel)
     {
         $kernel = array_map(function ($tuple) {
-            list ($car, $cdr) = $tuple;
+            [$car, $cdr] = $tuple;
 
             return ($car + $cdr) * ($car + $cdr + 1) / 2 + $cdr;
         }, $kernel);

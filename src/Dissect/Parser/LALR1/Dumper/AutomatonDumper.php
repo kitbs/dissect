@@ -79,7 +79,7 @@ class AutomatonDumper
         $this->writeState($writer, $this->automaton->getState($n));
 
         $table = $this->automaton->getTransitionTable();
-        $row = isset($table[$n]) ? $table[$n] : array();
+        $row = $table[$n] ?? array();
 
         foreach ($row as $dest) {
             if ($dest !== $n) {

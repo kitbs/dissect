@@ -123,7 +123,7 @@ class CommonNode implements Node
 
     public function count()
     {
-        return count($this->children);
+        return is_countable($this->children) ? count($this->children) : 0;
     }
 
     public function getIterator()

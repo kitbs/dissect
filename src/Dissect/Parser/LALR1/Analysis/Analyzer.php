@@ -67,7 +67,7 @@ class Analyzer
 
         // construct the initial state
         $state = new State($kernelSet->insert(
-            [$initialItem->getRule()->getNumber(), $initialItem->getDotIndex()],
+            [[$initialItem->getRule()->getNumber(), $initialItem->getDotIndex()]],
         ), [$initialItem]);
 
         // the initial item automatically has EOF

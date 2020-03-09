@@ -22,6 +22,14 @@ abstract class AbstractLexer implements Lexer
     private $line = 1;
 
     /**
+     * Construct the class.
+     */
+    public function __construct()
+    {
+        $this->define();
+    }
+
+    /**
      * Returns the current line.
      *
      * @return int The current line.
@@ -95,4 +103,6 @@ abstract class AbstractLexer implements Lexer
 
         return new ArrayTokenStream($tokens);
     }
+
+    abstract protected function define(): void;
 }

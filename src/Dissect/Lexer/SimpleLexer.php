@@ -34,7 +34,7 @@ class SimpleLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function token($type, $value = null)
+    public function token($type, $value = null): self
     {
         if ($value) {
             $this->recognizers[$type] = new SimpleRecognizer($value);
@@ -53,7 +53,7 @@ class SimpleLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function regex($type, $regex)
+    public function regex($type, $regex): self
     {
         $this->recognizers[$type] = new RegexRecognizer($regex);
 
@@ -67,7 +67,7 @@ class SimpleLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function skip()
+    public function skip(): self
     {
         $this->skipTokens = func_get_args();
 
@@ -77,7 +77,7 @@ class SimpleLexer extends AbstractLexer
     /**
      * {@inheritDoc}
      */
-    protected function shouldSkipToken(Token $token)
+    protected function shouldSkipToken(Token $token): bool
     {
         return in_array($token->getType(), $this->skipTokens);
     }
@@ -85,7 +85,7 @@ class SimpleLexer extends AbstractLexer
     /**
      * {@inheritDoc}
      */
-    protected function extractToken($string)
+    protected function extractToken(?string $string): ?CommonToken
     {
         $value = $type = null;
 

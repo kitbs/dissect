@@ -63,7 +63,7 @@ class SimpleLexer extends AbstractLexer
     /**
      * Marks the token types given as arguments to be skipped.
      *
-     * @param mixed $type,... Unlimited number of token types.
+     * @param mixed $type ,... Unlimited number of token types.
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
@@ -87,6 +87,7 @@ class SimpleLexer extends AbstractLexer
      */
     protected function extractToken(string $string): ?Token
     {
+        $v = null;
         $value = $type = null;
 
         foreach ($this->recognizers as $t => $recognizer) {

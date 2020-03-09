@@ -19,7 +19,7 @@ if (is_dir($vendor = __DIR__ . '/../vendor')) {
     );
 }
 
-if (!class_exists('Symfony\Component\Console\Application')) {
+if (!class_exists(\Symfony\Component\Console\Application::class)) {
     die(
         'You must install the symfony/console package in order ' .
         'to use the command-line tool.' . PHP_EOL

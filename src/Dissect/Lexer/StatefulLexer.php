@@ -88,7 +88,7 @@ class StatefulLexer extends AbstractLexer
     /**
      * Marks the token types given as arguments to be skipped.
      *
-     * @param mixed $type,... Unlimited number of token types.
+     * @param mixed $type ,... Unlimited number of token types.
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
@@ -170,6 +170,7 @@ class StatefulLexer extends AbstractLexer
      */
     protected function extractToken(string $string): ?Token
     {
+        $v = null;
         if (empty($this->stateStack)) {
             throw new LogicException("You must set a starting state before lexing.");
         }

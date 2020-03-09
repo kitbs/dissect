@@ -11,8 +11,14 @@ use RuntimeException;
  */
 class RecognitionException extends RuntimeException
 {
+    /**
+     * @var string
+     */
     protected $parameter;
     protected $position;
+    /**
+     * @var int
+     */
     protected $sourceLine;
 
     /**
@@ -37,7 +43,7 @@ class RecognitionException extends RuntimeException
         parent::__construct($message);
     }
 
-    public function getParameter()
+    public function getParameter(): string
     {
         return $this->parameter;
     }
@@ -47,7 +53,7 @@ class RecognitionException extends RuntimeException
         return $this->position;
     }
 
-    public function getSourceLine()
+    public function getSourceLine(): int
     {
         return $this->sourceLine;
     }

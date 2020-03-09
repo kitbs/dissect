@@ -9,7 +9,13 @@ namespace Dissect\Parser\LALR1\Dumper;
  */
 class StringWriter
 {
+    /**
+     * @var int
+     */
     protected $indent = 0;
+    /**
+     * @var string
+     */
     protected $string = '';
 
     /**
@@ -17,7 +23,7 @@ class StringWriter
      *
      * @param string $string The string to write.
      */
-    public function write($string)
+    public function write(string $string): void
     {
         $this->string .= $string;
     }
@@ -27,7 +33,7 @@ class StringWriter
      *
      * @return string The string.
      */
-    public function get()
+    public function get(): string
     {
         return $this->string;
     }
@@ -35,7 +41,7 @@ class StringWriter
     /**
      * Adds a level of indentation.
      */
-    public function indent()
+    public function indent(): void
     {
         $this->indent++;
     }
@@ -43,7 +49,7 @@ class StringWriter
     /**
      * Removes a level of indentation.
      */
-    public function outdent()
+    public function outdent(): void
     {
         $this->indent--;
     }
@@ -59,7 +65,7 @@ class StringWriter
      *
      * @param string $string The string to write.
      */
-    public function writeLine($string = null)
+    public function writeLine(string $string = null): void
     {
         if ($string) {
             $this->write(sprintf(

@@ -15,9 +15,21 @@ use LogicException;
  */
 class StatefulLexer extends AbstractLexer
 {
+    /**
+     * @var mixed[]
+     */
     protected $states = array();
+    /**
+     * @var mixed[]
+     */
     protected $stateStack = array();
+    /**
+     * @var string|null
+     */
     protected $stateBeingBuilt = null;
+    /**
+     * @var string|null
+     */
     protected $typeBeingBuilt = null;
 
     /**

@@ -15,7 +15,7 @@ class ProductionTableDumper implements TableDumper
     /**
      * {@inheritDoc}
      */
-    public function dump(array $table)
+    public function dump(array $table): string
     {
         $writer = new StringWriter();
 
@@ -40,12 +40,12 @@ class ProductionTableDumper implements TableDumper
         return $writer->get();
     }
 
-    protected function writeIntro(StringWriter $writer)
+    protected function writeIntro(StringWriter $writer): void
     {
         $writer->write("<?php return array('action'=>array(");
     }
 
-    protected function writeState(StringWriter $writer, $num, $state)
+    protected function writeState(StringWriter $writer, $num, $state): void
     {
         $writer->write((string)$num . '=>array(');
 
@@ -57,7 +57,7 @@ class ProductionTableDumper implements TableDumper
         $writer->write(')');
     }
 
-    protected function writeAction(StringWriter $writer, $trigger, $action)
+    protected function writeAction(StringWriter $writer, $trigger, $action): void
     {
         $writer->write(sprintf(
             "'%s'=>%d",
@@ -66,12 +66,12 @@ class ProductionTableDumper implements TableDumper
         ));
     }
 
-    protected function writeMiddle(StringWriter $writer)
+    protected function writeMiddle(StringWriter $writer): void
     {
         $writer->write("),'goto'=>array(");
     }
 
-    protected function writeGoto(StringWriter $writer, $num, $map)
+    protected function writeGoto(StringWriter $writer, $num, $map): void
     {
         $writer->write((string)$num . '=>array(');
 
@@ -88,7 +88,7 @@ class ProductionTableDumper implements TableDumper
         $writer->write(')');
     }
 
-    protected function writeOutro(StringWriter $writer)
+    protected function writeOutro(StringWriter $writer): void
     {
         $writer->write('));');
     }

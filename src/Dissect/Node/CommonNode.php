@@ -11,6 +11,9 @@ use RuntimeException;
  */
 class CommonNode implements Node
 {
+    /**
+     * @var \Dissect\Node\Node[]
+     */
     public $children;
     /**
      * @var array
@@ -27,6 +30,8 @@ class CommonNode implements Node
      *
      * @param array $attributes The attributes of this node.
      * @param array $children The children of this node.
+     * @param mixed[] $attributes
+     * @param mixed[] $nodes
      */
     public function __construct(array $attributes = array(), array $nodes = array())
     {
@@ -36,8 +41,9 @@ class CommonNode implements Node
 
     /**
      * {@inheritDoc}
+     * @return mixed[]
      */
-    public function getNodes()
+    public function getNodes(): array
     {
         return $this->nodes;
     }
@@ -45,7 +51,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function hasNode($key)
+    public function hasNode(string $key): bool
     {
         return isset($this->nodes[$key]);
     }
@@ -53,7 +59,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function getNode($key)
+    public function getNode($key): \Dissect\Node\Node
     {
         if (!isset($this->children[$key])) {
             throw new RuntimeException(sprintf('No child node "%s" exists.', $key));
@@ -65,7 +71,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function setNode($key, Node $child)
+    public function setNode(string $key, Node $child): void
     {
         $this->children[$key] = $child;
     }
@@ -73,15 +79,16 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function removeNode($key)
+    public function removeNode(string $key): void
     {
         unset($this->children[$key]);
     }
 
     /**
      * {@inheritDoc}
+     * @return mixed[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
@@ -89,7 +96,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function hasAttribute($key)
+    public function hasAttribute(string $key): bool
     {
         return isset($this->attributes[$key]);
     }
@@ -97,7 +104,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function getAttribute($key)
+    public function getAttribute(string $key)
     {
         if (!isset($this->attributes[$key])) {
             throw new RuntimeException(sprintf('No attribute "%s" exists.', $key));
@@ -109,7 +116,7 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function setAttribute($key, $value)
+    public function setAttribute(string $key, $value): void
     {
         $this->attributes[$key] = $value;
     }
@@ -117,12 +124,12 @@ class CommonNode implements Node
     /**
      * {@inheritDoc}
      */
-    public function removeAttribute($key)
+    public function removeAttribute(string $key): void
     {
         unset($this->attributes[$key]);
     }
 
-    public function count()
+    public function count(): int
     {
         return is_countable($this->children) ? count($this->children) : 0;
     }

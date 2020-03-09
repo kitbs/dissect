@@ -53,7 +53,7 @@ EOT;
      * @param string $lookahead The conflicting lookahead.
      * @param Automaton $automaton The faulty automaton.
      */
-    public function __construct($state, Rule $firstRule, Rule $secondRule, $lookahead, Automaton $automaton)
+    public function __construct($state, Rule $firstRule, Rule $secondRule, string $lookahead, Automaton $automaton)
     {
         $components1 = $firstRule->getComponents();
         $components2 = $secondRule->getComponents();
@@ -84,7 +84,7 @@ EOT;
      *
      * @return Rule The first conflicting rule.
      */
-    public function getFirstRule()
+    public function getFirstRule(): \Dissect\Parser\Rule
     {
         return $this->firstRule;
     }
@@ -94,7 +94,7 @@ EOT;
      *
      * @return Rule The second conflicting rule.
      */
-    public function getSecondRule()
+    public function getSecondRule(): \Dissect\Parser\Rule
     {
         return $this->secondRule;
     }
@@ -104,7 +104,7 @@ EOT;
      *
      * @return string The conflicting lookahead.
      */
-    public function getLookahead()
+    public function getLookahead(): string
     {
         return $this->lookahead;
     }

@@ -11,6 +11,9 @@ use LogicException;
  */
 class Grammar
 {
+    /**
+     * @var string[]
+     */
     public $nonterminals;
     /**
      * The name given to the rule the grammar is augmented with
@@ -129,7 +132,7 @@ class Grammar
      */
     const NONASSOC = 2;
 
-    public function __invoke($nonterminal)
+    public function __invoke($nonterminal): self
     {
         $this->currentNonterminal = $nonterminal;
 
@@ -143,7 +146,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance.
      */
-    public function is()
+    public function is(): self
     {
         $this->currentOperators = null;
 
@@ -173,7 +176,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance.
      */
-    public function call($callback)
+    public function call(callable $callback): self
     {
         if ($this->currentRule === null) {
             throw new LogicException(
@@ -191,12 +194,12 @@ class Grammar
      *
      * @return Rule[] The rules.
      */
-    public function getRules()
+    public function getRules(): array
     {
         return $this->rules;
     }
 
-    public function getRule($number)
+    public function getRule($number): \Dissect\Parser\Rule
     {
         return $this->rules[$number];
     }
@@ -206,7 +209,7 @@ class Grammar
      *
      * @return string[] The nonterminals.
      */
-    public function getNonterminals()
+    public function getNonterminals(): array
     {
         return $this->nonterminals;
     }
@@ -216,7 +219,7 @@ class Grammar
      *
      * @return array The rules grouped by nonterminal name.
      */
-    public function getGroupedRules()
+    public function getGroupedRules(): array
     {
         return $this->groupedRules;
     }
@@ -226,7 +229,7 @@ class Grammar
      *
      * @param string The name of the start rule.
      */
-    public function start($name)
+    public function start($name): void
     {
         $this->rules[0] = new Rule(0, self::START_RULE_NAME, array($name));
     }
@@ -236,7 +239,7 @@ class Grammar
      *
      * @return Rule The start rule.
      */
-    public function getStartRule()
+    public function getStartRule(): \Dissect\Parser\Rule
     {
         if (!isset($this->rules[0])) {
             throw new LogicException("No start rule specified.");
@@ -250,7 +253,7 @@ class Grammar
      *
      * @param int $mode The bitmask for the mode.
      */
-    public function resolve($mode)
+    public function resolve(int $mode): void
     {
         $this->conflictsMode = $mode;
     }
@@ -260,7 +263,7 @@ class Grammar
      *
      * @return int The bitmask of the resolution mode.
      */
-    public function getConflictsMode()
+    public function getConflictsMode(): int
     {
         return $this->conflictsMode;
     }
@@ -272,7 +275,7 @@ class Grammar
      *
      * @return boolean
      */
-    public function hasNonterminal($name)
+    public function hasNonterminal(string $name): bool
     {
         return array_key_exists($name, $this->groupedRules);
     }
@@ -284,7 +287,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance for fluent interface.
      */
-    public function operators()
+    public function operators(): self
     {
         $this->currentRule = null;
 
@@ -307,7 +310,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance for fluent interface.
      */
-    public function left()
+    public function left(): \Dissect\Parser\Grammar
     {
         return $this->assoc(self::LEFT);
     }
@@ -317,7 +320,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance for fluent interface.
      */
-    public function right()
+    public function right(): \Dissect\Parser\Grammar
     {
         return $this->assoc(self::RIGHT);
     }
@@ -327,7 +330,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance for fluent interface.
      */
-    public function nonassoc()
+    public function nonassoc(): \Dissect\Parser\Grammar
     {
         return $this->assoc(self::NONASSOC);
     }
@@ -339,7 +342,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance for fluent interface.
      */
-    public function assoc($a)
+    public function assoc(int $a): self
     {
         if ($this->currentOperators === []) {
             throw new LogicException('Define a group of operators first.');
@@ -361,7 +364,7 @@ class Grammar
      *
      * @return \Dissect\Parser\Grammar This instance for fluent interface.
      */
-    public function prec($i)
+    public function prec(int $i): self
     {
         if ($this->currentOperators === []) {
             if (!$this->currentRule) {
@@ -385,7 +388,7 @@ class Grammar
      *
      * @return boolean
      */
-    public function hasOperator($token)
+    public function hasOperator(string $token): bool
     {
         return array_key_exists($token, $this->operators);
     }

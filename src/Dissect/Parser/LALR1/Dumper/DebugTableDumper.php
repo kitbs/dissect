@@ -42,7 +42,7 @@ class DebugTableDumper implements TableDumper
     /**
      * {@inheritDoc}
      */
-    public function dump(array $table)
+    public function dump(array $table): string
     {
         // for readability
         ksort($table['action']);
@@ -77,7 +77,7 @@ class DebugTableDumper implements TableDumper
         return $this->writer->get();
     }
 
-    protected function writeHeader()
+    protected function writeHeader(): void
     {
         $this->writer->writeLine('<?php');
         $this->writer->writeLine();
@@ -86,7 +86,7 @@ class DebugTableDumper implements TableDumper
         $this->writer->writeLine("'action' => array(");
     }
 
-    protected function writeState($n, array $state)
+    protected function writeState($n, array $state): void
     {
         $this->writer->writeLine((string)$n . ' => array(');
         $this->writer->indent();
@@ -100,7 +100,7 @@ class DebugTableDumper implements TableDumper
         $this->writer->writeLine('),');
     }
 
-    protected function writeAction($trigger, $action)
+    protected function writeAction($trigger, $action): void
     {
         if ($action > 0) {
             $this->writer->writeLine(sprintf(
@@ -134,14 +134,14 @@ class DebugTableDumper implements TableDumper
         ));
     }
 
-    protected function writeMiddle()
+    protected function writeMiddle(): void
     {
         $this->writer->writeLine('),');
         $this->writer->writeLine();
         $this->writer->writeLine("'goto' => array(");
     }
 
-    protected function writeGoto($n, array $map)
+    protected function writeGoto($n, array $map): void
     {
         $this->writer->writeLine((string)$n . ' => array(');
         $this->writer->indent();
@@ -166,7 +166,7 @@ class DebugTableDumper implements TableDumper
         $this->writer->writeLine('),');
     }
 
-    protected function writeFooter()
+    protected function writeFooter(): void
     {
         $this->writer->writeLine('),');
         $this->writer->outdent();

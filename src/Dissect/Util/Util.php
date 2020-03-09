@@ -16,7 +16,7 @@ abstract class Util
      *
      * @return array The union of given sets.
      */
-    public static function union()
+    public static function union(): array
     {
         return array_unique(array_merge(...func_get_args()));
     }
@@ -29,7 +29,7 @@ abstract class Util
      *
      * @return boolean Whether there is a difference.
      */
-    public static function different(array $first, array $second)
+    public static function different(array $first, array $second): bool
     {
         return count(array_diff($first, $second)) !== 0;
     }
@@ -41,7 +41,7 @@ abstract class Util
      *
      * @return int The length.
      */
-    public static function stringLength($str)
+    public static function stringLength(string $str): int
     {
         return strlen(utf8_decode($str));
     }
@@ -55,7 +55,7 @@ abstract class Util
      *
      * @return string The substring.
      */
-    public static function substring($str, $position, $length = null)
+    public static function substring(string $str, int $position, int $length = null): string
     {
         static $lengthFunc = null;
 

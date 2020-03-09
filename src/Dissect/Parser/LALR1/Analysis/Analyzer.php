@@ -25,7 +25,7 @@ class Analyzer
      *
      * @return AnalysisResult The result ofthe analysis.
      */
-    public function analyze(Grammar $grammar)
+    public function analyze(Grammar $grammar): \Dissect\Parser\LALR1\Analysis\AnalysisResult
     {
         $automaton = $this->buildAutomaton($grammar);
         [$parseTable, $conflicts] = $this->buildParseTable($automaton, $grammar);
@@ -40,7 +40,7 @@ class Analyzer
      *
      * @return Automaton The resulting automaton.
      */
-    protected function buildAutomaton(Grammar $grammar)
+    protected function buildAutomaton(Grammar $grammar): \Dissect\Parser\LALR1\Analysis\Automaton
     {
         // the eventual automaton
         $automaton = new Automaton();
@@ -210,7 +210,7 @@ class Analyzer
                     }
                 } else {
                     // new state needs to be created
-                    $newState = new State($num, array_map(function (Item $i) {
+                    $newState = new State($num, array_map(function (Item $i): \Dissect\Parser\LALR1\Analysis\Item {
                         $new = new Item($i->getRule(), $i->getDotIndex() + 1);
 
                         // connect the two items
@@ -242,7 +242,7 @@ class Analyzer
      *
      * @return array The parse table.
      */
-    protected function buildParseTable(Automaton $automaton, Grammar $grammar)
+    protected function buildParseTable(Automaton $automaton, Grammar $grammar): array
     {
         $conflictsMode = $grammar->getConflictsMode();
         $conflicts = array();
@@ -454,7 +454,7 @@ class Analyzer
      *
      * @return array Calculated FIRST sets.
      */
-    protected function calculateFirstSets(array $rules)
+    protected function calculateFirstSets(array $rules): array
     {
         // initialize
         $firstSets = array();

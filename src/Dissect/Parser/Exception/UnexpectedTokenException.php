@@ -61,7 +61,7 @@ EOT;
      *
      * @return Token The unexpected token.
      */
-    public function getToken()
+    public function getToken(): \Dissect\Lexer\Token
     {
         return $this->token;
     }
@@ -71,7 +71,7 @@ EOT;
      *
      * @return string[] The expected token types.
      */
-    public function getExpected()
+    public function getExpected(): array
     {
         return $this->expected;
     }

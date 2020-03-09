@@ -10,7 +10,13 @@ namespace Dissect\Parser\LALR1\Analysis\KernelSet;
  */
 class KernelSet
 {
+    /**
+     * @var int
+     */
     protected $nextNumber = 0;
+    /**
+     * @var \Dissect\Parser\LALR1\Analysis\KernelSet\Node|null
+     */
     protected $root = null;
 
     /**
@@ -21,7 +27,7 @@ class KernelSet
      *
      * @param array $kernel The state kernel.
      *
-     * @return int The state number.
+     * @return mixed|float|int The state number.
      */
     public function insert(array $kernel)
     {
@@ -65,7 +71,7 @@ class KernelSet
      *
      * @return array The hashed kernel.
      */
-    public static function hashKernel(array $kernel)
+    public static function hashKernel(array $kernel): array
     {
         $kernel = array_map(function ($tuple) {
             [$car, $cdr] = $tuple;

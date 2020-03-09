@@ -20,5 +20,5 @@ interface Recognizer
      *
      * @return boolean Whether the match was successful or not.
      */
-    public function match($string, &$result);
+    public function match(string $string, string &$result): bool;
 }

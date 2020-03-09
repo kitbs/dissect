@@ -36,7 +36,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
@@ -44,7 +44,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function getCurrentToken()
+    public function getCurrentToken(): \Dissect\Lexer\Token
     {
         return $this->tokens[$this->position];
     }
@@ -52,7 +52,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function lookAhead($n)
+    public function lookAhead(int $n): \Dissect\Lexer\Token
     {
         if (isset($this->tokens[$this->position + $n])) {
             return $this->tokens[$this->position + $n];
@@ -64,7 +64,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function get($n)
+    public function get(int $n): \Dissect\Lexer\Token
     {
         if (isset($this->tokens[$n])) {
             return $this->tokens[$n];
@@ -76,7 +76,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function move($n)
+    public function move(int $n)
     {
         if (!isset($this->tokens[$n])) {
             throw new OutOfBoundsException('Invalid index to move to.');
@@ -88,7 +88,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * {@inheritDoc}
      */
-    public function seek($n)
+    public function seek(int $n)
     {
         if (!isset($this->tokens[$this->position + $n])) {
             throw new OutOfBoundsException('Invalid seek.');
@@ -112,7 +112,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return is_countable($this->tokens) ? count($this->tokens) : 0;
     }
@@ -120,7 +120,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new ArrayIterator($this->tokens);
     }

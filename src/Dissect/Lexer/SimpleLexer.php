@@ -34,7 +34,7 @@ class SimpleLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function token($type, $value = null): self
+    public function token(string $type, string $value = null): self
     {
         if ($value) {
             $this->recognizers[$type] = new SimpleRecognizer($value);
@@ -53,7 +53,7 @@ class SimpleLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function regex($type, $regex): self
+    public function regex(string $type, string $regex): self
     {
         $this->recognizers[$type] = new RegexRecognizer($regex);
 

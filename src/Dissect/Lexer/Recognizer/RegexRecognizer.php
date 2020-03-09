@@ -10,6 +10,9 @@ namespace Dissect\Lexer\Recognizer;
  */
 class RegexRecognizer implements Recognizer
 {
+    /**
+     * @var string
+     */
     protected $regex;
 
     /**
@@ -17,7 +20,7 @@ class RegexRecognizer implements Recognizer
      *
      * @param string $regex The regex to use in the match.
      */
-    public function __construct($regex)
+    public function __construct(string $regex)
     {
         $this->regex = $regex;
     }
@@ -25,7 +28,7 @@ class RegexRecognizer implements Recognizer
     /**
      * {@inheritDoc}
      */
-    public function match($string, &$result)
+    public function match(string $string, string &$result): bool
     {
         $r = preg_match($this->regex, $string, $match, PREG_OFFSET_CAPTURE);
 

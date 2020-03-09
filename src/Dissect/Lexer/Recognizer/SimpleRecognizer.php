@@ -10,6 +10,9 @@ namespace Dissect\Lexer\Recognizer;
  */
 class SimpleRecognizer implements Recognizer
 {
+    /**
+     * @var string
+     */
     protected $string;
 
     /**
@@ -17,7 +20,7 @@ class SimpleRecognizer implements Recognizer
      *
      * @param string $string The string to match by.
      */
-    public function __construct($string)
+    public function __construct(string $string)
     {
         $this->string = $string;
     }
@@ -25,7 +28,7 @@ class SimpleRecognizer implements Recognizer
     /**
      * {@inheritDoc}
      */
-    public function match($string, &$result)
+    public function match(string $string, string &$result): bool
     {
         if (strncmp($string, $this->string, strlen($this->string)) === 0) {
             $result = $this->string;

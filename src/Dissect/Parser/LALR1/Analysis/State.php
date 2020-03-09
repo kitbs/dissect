@@ -30,7 +30,7 @@ class State
      * @param int $number The number identifying this state.
      * @param array $items The initial items of this state.
      */
-    public function __construct($number, array $items)
+    public function __construct(int $number, array $items)
     {
         $this->number = $number;
 
@@ -44,7 +44,7 @@ class State
      *
      * @param Item $item The new item.
      */
-    public function add(Item $item)
+    public function add(Item $item): void
     {
         $this->items[] = $item;
 
@@ -59,7 +59,7 @@ class State
      *
      * @return Item The item.
      */
-    public function get($ruleNumber, $dotIndex)
+    public function get(int $ruleNumber, int $dotIndex): \Dissect\Parser\LALR1\Analysis\Item
     {
         return $this->itemMap[$ruleNumber][$dotIndex];
     }
@@ -69,7 +69,7 @@ class State
      *
      * @return int
      */
-    public function getNumber()
+    public function getNumber(): int
     {
         return $this->number;
     }
@@ -79,7 +79,7 @@ class State
      *
      * @return array The items.
      */
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }

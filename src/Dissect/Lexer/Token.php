@@ -21,12 +21,12 @@ interface Token
      *
      * @return string The token value.
      */
-    public function getValue();
+    public function getValue(): string;
 
     /**
      * Returns the line on which the token was found.
      *
      * @return int The line.
      */
-    public function getLine();
+    public function getLine(): int;
 }

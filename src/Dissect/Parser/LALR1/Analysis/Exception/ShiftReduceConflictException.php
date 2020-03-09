@@ -42,7 +42,7 @@ EOT;
      * @param string $lookahead The conflicting lookahead to shift.
      * @param Automaton $automaton The faulty automaton.
      */
-    public function __construct($state, Rule $rule, $lookahead, Automaton $automaton)
+    public function __construct($state, Rule $rule, string $lookahead, Automaton $automaton)
     {
         $components = $rule->getComponents();
 
@@ -68,7 +68,7 @@ EOT;
      *
      * @return Rule The conflicting rule.
      */
-    public function getRule()
+    public function getRule(): \Dissect\Parser\Rule
     {
         return $this->rule;
     }
@@ -78,7 +78,7 @@ EOT;
      *
      * @return string The conflicting lookahead.
      */
-    public function getLookahead()
+    public function getLookahead(): string
     {
         return $this->lookahead;
     }

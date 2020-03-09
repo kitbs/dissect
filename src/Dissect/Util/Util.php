@@ -18,7 +18,7 @@ abstract class Util
      */
     public static function union()
     {
-        return array_unique(call_user_func_array('array_merge', func_get_args()));
+        return array_unique(array_merge(...func_get_args()));
     }
 
     /**

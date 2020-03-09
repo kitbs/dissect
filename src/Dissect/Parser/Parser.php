@@ -13,6 +13,7 @@ interface Parser
 {
     /**
      * The token type that represents an EOF.
+     * @var string
      */
     const EOF_TOKEN_TYPE = '$eof';
 
@@ -20,7 +21,7 @@ interface Parser
      * Parses a token stream and returns the semantical value
      * of the input.
      *
-     * @param \Dissect\Lexer\TokenStream\TokenStream $stream The token stream.
+     * @param TokenStream $stream The token stream.
      *
      * @return mixed The semantical value of the input.
      */

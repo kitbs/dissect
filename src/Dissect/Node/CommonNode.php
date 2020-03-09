@@ -11,15 +11,16 @@ use RuntimeException;
  */
 class CommonNode implements Node
 {
+    public $children;
     /**
      * @var array
      */
-    protected $nodes;
+    protected $nodes = [];
 
     /**
      * @var array
      */
-    protected $attributes;
+    protected $attributes = [];
 
     /**
      * Constructor.

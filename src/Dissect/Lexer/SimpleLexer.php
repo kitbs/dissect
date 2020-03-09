@@ -88,14 +88,13 @@ class SimpleLexer extends AbstractLexer
     protected function extractToken(string $string): ?Token
     {
         $v = null;
-        $value = $type = null;
+        $value = null;
+        $type = null;
 
         foreach ($this->recognizers as $t => $recognizer) {
-            if ($recognizer->match($string, $v)) {
-                if ($value === null || Util::stringLength($v) > Util::stringLength($value)) {
-                    $value = $v;
-                    $type = $t;
-                }
+            if ($recognizer->match($string, $v) && ($value === null || Util::stringLength($v) > Util::stringLength($value))) {
+                $value = $v;
+                $type = $t;
             }
         }
 

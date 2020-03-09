@@ -2,6 +2,7 @@
 
 namespace Dissect\Lexer\TokenStream;
 
+use Dissect\Lexer\Token;
 use ArrayIterator;
 use OutOfBoundsException;
 
@@ -13,9 +14,9 @@ use OutOfBoundsException;
 class ArrayTokenStream implements TokenStream
 {
     /**
-     * @var \Dissect\Lexer\Token[]
+     * @var Token[]
      */
-    protected $tokens;
+    protected $tokens = [];
 
     /**
      * @var int
@@ -25,7 +26,7 @@ class ArrayTokenStream implements TokenStream
     /**
      * Constructor.
      *
-     * @param \Dissect\Lexer\Token[] $tokens The tokens in this stream.
+     * @param Token[] $tokens The tokens in this stream.
      */
     public function __construct(array $tokens)
     {
@@ -117,7 +118,7 @@ class ArrayTokenStream implements TokenStream
     }
 
     /**
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {

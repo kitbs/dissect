@@ -14,12 +14,12 @@ use Dissect\Parser\Grammar;
 class DebugTableDumper implements TableDumper
 {
     /**
-     * @var \Dissect\Parser\Grammar
+     * @var Grammar
      */
     protected $grammar;
 
     /**
-     * @var \Dissect\Parser\LALR1\Dumper\StringWriter
+     * @var StringWriter
      */
     protected $writer;
 
@@ -31,7 +31,7 @@ class DebugTableDumper implements TableDumper
     /**
      * Constructor.
      *
-     * @param \Dissect\Parser\Grammar $grammar The grammar of this parse table.
+     * @param Grammar $grammar The grammar of this parse table.
      */
     public function __construct(Grammar $grammar)
     {
@@ -112,11 +112,7 @@ class DebugTableDumper implements TableDumper
             $rule = $this->grammar->getRule(-$action);
             $components = $rule->getComponents();
 
-            if (empty($components)) {
-                $rhs = '/* empty */';
-            } else {
-                $rhs = implode(' ', $components);
-            }
+            $rhs = empty($components) ? '/* empty */' : implode(' ', $components);
 
             $this->writer->writeLine(sprintf(
                 '// on %s reduce by rule %s -> %s',

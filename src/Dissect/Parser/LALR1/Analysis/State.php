@@ -42,7 +42,7 @@ class State
     /**
      * Adds a new item to this state.
      *
-     * @param \Dissect\Parser\LALR1\Analysis\Item $item The new item.
+     * @param Item $item The new item.
      */
     public function add(Item $item)
     {
@@ -57,7 +57,7 @@ class State
      * @param int $ruleNumber The number of the rule of the desired item.
      * @param int $dotIndex The dot index of the desired item.
      *
-     * @return \Dissect\Parser\LALR1\Analysis\Item The item.
+     * @return Item The item.
      */
     public function get($ruleNumber, $dotIndex)
     {

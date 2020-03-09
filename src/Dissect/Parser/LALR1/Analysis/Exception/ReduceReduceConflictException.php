@@ -15,6 +15,7 @@ class ReduceReduceConflictException extends ConflictException
 {
     /**
      * The exception message template.
+     * @var string
      */
     const MESSAGE = <<<EOT
 The grammar exhibits a reduce/reduce conflict on rules:
@@ -29,12 +30,12 @@ vs:
 EOT;
 
     /**
-     * @var \Dissect\Parser\Rule
+     * @var Rule
      */
     protected $firstRule;
 
     /**
-     * @var \Dissect\Parser\Rule
+     * @var Rule
      */
     protected $secondRule;
 
@@ -47,10 +48,10 @@ EOT;
      * Constructor.
      *
      * @param int $state The number of the inadequate state.
-     * @param \Dissect\Parser\Rule $firstRule The first conflicting grammar rule.
-     * @param \Dissect\Parser\Rule $secondRule The second conflicting grammar rule.
+     * @param Rule $firstRule The first conflicting grammar rule.
+     * @param Rule $secondRule The second conflicting grammar rule.
      * @param string $lookahead The conflicting lookahead.
-     * @param \Dissect\Parser\LALR1\Analysis\Automaton $automaton The faulty automaton.
+     * @param Automaton $automaton The faulty automaton.
      */
     public function __construct($state, Rule $firstRule, Rule $secondRule, $lookahead, Automaton $automaton)
     {
@@ -81,7 +82,7 @@ EOT;
     /**
      * Returns the first conflicting rule.
      *
-     * @return \Dissect\Parser\Rule The first conflicting rule.
+     * @return Rule The first conflicting rule.
      */
     public function getFirstRule()
     {
@@ -91,7 +92,7 @@ EOT;
     /**
      * Returns the second conflicting rule.
      *
-     * @return \Dissect\Parser\Rule The second conflicting rule.
+     * @return Rule The second conflicting rule.
      */
     public function getSecondRule()
     {

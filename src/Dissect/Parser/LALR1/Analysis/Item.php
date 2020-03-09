@@ -31,7 +31,7 @@ use Dissect\Parser\Rule;
 class Item
 {
     /**
-     * @var \Dissect\Parser\Rule
+     * @var Rule
      */
     protected $rule;
 
@@ -53,7 +53,7 @@ class Item
     /**
      * Constructor.
      *
-     * @param \Dissect\Parser\Rule $rule The rule of this item.
+     * @param Rule $rule The rule of this item.
      * @param int $dotIndex The index of the dot in this item.
      */
     public function __construct(Rule $rule, $dotIndex)
@@ -93,7 +93,7 @@ class Item
     /**
      * Returns the rule of this item.
      *
-     * @return \Dissect\Parser\Rule The rule.
+     * @return Rule The rule.
      */
     public function getRule()
     {

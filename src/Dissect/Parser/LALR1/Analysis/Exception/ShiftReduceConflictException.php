@@ -15,6 +15,7 @@ class ShiftReduceConflictException extends ConflictException
 {
     /**
      * The exception message template.
+     * @var string
      */
     const MESSAGE = <<<EOT
 The grammar exhibits a shift/reduce conflict on rule:
@@ -25,7 +26,7 @@ The grammar exhibits a shift/reduce conflict on rule:
 EOT;
 
     /**
-     * @var \Dissect\Parser\Rule
+     * @var Rule
      */
     protected $rule;
 
@@ -37,9 +38,9 @@ EOT;
     /**
      * Constructor.
      *
-     * @param \Dissect\Parser\Rule $rule The conflicting grammar rule.
+     * @param Rule $rule The conflicting grammar rule.
      * @param string $lookahead The conflicting lookahead to shift.
-     * @param \Dissect\Parser\LALR1\Analysis\Automaton $automaton The faulty automaton.
+     * @param Automaton $automaton The faulty automaton.
      */
     public function __construct($state, Rule $rule, $lookahead, Automaton $automaton)
     {
@@ -65,7 +66,7 @@ EOT;
     /**
      * Returns the conflicting rule.
      *
-     * @return \Dissect\Parser\Rule The conflicting rule.
+     * @return Rule The conflicting rule.
      */
     public function getRule()
     {

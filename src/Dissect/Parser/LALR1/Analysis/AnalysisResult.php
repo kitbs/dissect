@@ -10,25 +10,25 @@ namespace Dissect\Parser\LALR1\Analysis;
 class AnalysisResult
 {
     /**
-     * @var \Dissect\Parser\LALR1\Analysis\Automaton
+     * @var Automaton
      */
     protected $automaton;
 
     /**
      * @var array
      */
-    protected $parseTable;
+    protected $parseTable = [];
 
     /**
      * @var array
      */
-    protected $resolvedConflicts;
+    protected $resolvedConflicts = [];
 
     /**
      * Constructor.
      *
      * @param array $parseTable The parse table.
-     * @param \Dissect\Parser\LALR1\Analysis\Automaton $automaton
+     * @param Automaton $automaton
      * @param array $conflicts An array of conflicts resolved during parse table
      * construction.
      */
@@ -42,7 +42,7 @@ class AnalysisResult
     /**
      * Returns the handle-finding FSA.
      *
-     * @return \Dissect\Parser\LALR1\Analysis\Automaton
+     * @return Automaton
      */
     public function getAutomaton()
     {

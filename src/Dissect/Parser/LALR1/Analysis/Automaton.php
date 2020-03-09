@@ -23,7 +23,7 @@ class Automaton
     /**
      * Adds a new automaton state.
      *
-     * @param \Dissect\Parser\LALR1\Analysis\State $state The new state.
+     * @param State $state The new state.
      */
     public function addState(State $state)
     {
@@ -47,7 +47,7 @@ class Automaton
      *
      * @param int $number The state number.
      *
-     * @return \Dissect\Parser\LALR1\Analysis\State The requested state.
+     * @return State The requested state.
      */
     public function getState($number)
     {

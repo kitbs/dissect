@@ -21,9 +21,9 @@ class Analyzer
     /**
      * Performs a grammar analysis.
      *
-     * @param \Dissect\Parser\Grammar $grammar The grammar to analyse.
+     * @param Grammar $grammar The grammar to analyse.
      *
-     * @return \Dissect\Parser\LALR1\Analysis\AnalysisResult The result ofthe analysis.
+     * @return AnalysisResult The result ofthe analysis.
      */
     public function analyze(Grammar $grammar)
     {
@@ -36,9 +36,9 @@ class Analyzer
     /**
      * Builds the handle-finding FSA from the grammar.
      *
-     * @param \Dissect\Parser\Grammar $grammar The grammar.
+     * @param Grammar $grammar The grammar.
      *
-     * @return \Dissect\Parser\LALR1\Analysis\Automaton The resulting automaton.
+     * @return Automaton The resulting automaton.
      */
     protected function buildAutomaton(Grammar $grammar)
     {
@@ -88,7 +88,8 @@ class Analyzer
             // calculate closure
             $added = array();
             $currentItems = $state->getItems();
-            for ($x = 0; $x < (is_countable($currentItems) ? count($currentItems) : 0); $x++) {
+            $currentItemsCount = count($currentItems);
+            for ($x = 0; $x < (is_countable($currentItems) ? $currentItemsCount : 0); $x++) {
                 $item = $currentItems[$x];
 
                 if (!$item->isReduceItem()) {
@@ -143,12 +144,9 @@ class Analyzer
                         if (empty($lookahead)) {
                             $connect = true;
                             $pump = false;
-                        } else {
-                            if (in_array(Grammar::EPSILON, $lookahead)) {
-                                unset($lookahead[array_search(Grammar::EPSILON, $lookahead)]);
-
-                                $connect = true;
-                            }
+                        } elseif (in_array(Grammar::EPSILON, $lookahead)) {
+                            unset($lookahead[array_search(Grammar::EPSILON, $lookahead)]);
+                            $connect = true;
                         }
 
                         foreach ($groupedRules[$component] as $rule) {
@@ -240,7 +238,7 @@ class Analyzer
     /**
      * Encodes the handle-finding FSA as a LR parse table.
      *
-     * @param \Dissect\Parser\LALR1\Analysis\Automaton $automaton
+     * @param Automaton $automaton
      *
      * @return array The parse table.
      */
@@ -290,67 +288,61 @@ class Analyzer
                             $instruction = $table['action'][$num][$token];
 
                             if ($instruction > 0) {
-                                if ($conflictsMode & Grammar::OPERATORS) {
-                                    if ($grammar->hasOperator($token)) {
-                                        $operatorInfo = $grammar->getOperatorInfo($token);
-
-                                        $rulePrecedence = $item->getRule()->getPrecedence();
-
-                                        // unless the rule has given precedence
-                                        if ($rulePrecedence === null) {
-                                            foreach (array_reverse($item->getRule()->getComponents()) as $c) {
-                                                // try to extract it from the rightmost terminal
+                                if (($conflictsMode & Grammar::OPERATORS) !== 0 && $grammar->hasOperator($token)) {
+                                    $operatorInfo = $grammar->getOperatorInfo($token);
+                                    $rulePrecedence = $item->getRule()->getPrecedence();
+                                    // unless the rule has given precedence
+                                    if ($rulePrecedence === null) {
+                                        foreach (array_reverse($item->getRule()->getComponents()) as $c) {
+                                            // try to extract it from the rightmost terminal
                                                 if ($grammar->hasOperator($c)) {
-                                                    $ruleOperatorInfo = $grammar->getOperatorInfo($c);
-                                                    $rulePrecedence = $ruleOperatorInfo['prec'];
+                                                $ruleOperatorInfo = $grammar->getOperatorInfo($c);
+                                                $rulePrecedence = $ruleOperatorInfo['prec'];
 
-                                                    break;
-                                                }
+                                                break;
                                             }
                                         }
+                                    }
+                                    if ($rulePrecedence !== null) {
+                                        // if we actually have a rule precedence
 
-                                        if ($rulePrecedence !== null) {
-                                            // if we actually have a rule precedence
+                                        $tokenPrecedence = $operatorInfo['prec'];
 
-                                            $tokenPrecedence = $operatorInfo['prec'];
-
-                                            if ($rulePrecedence > $tokenPrecedence) {
-                                                // if the rule precedence is higher, reduce
+                                        if ($rulePrecedence > $tokenPrecedence) {
+                                            // if the rule precedence is higher, reduce
                                                 $table['action'][$num][$token] = -$ruleNumber;
-                                            } elseif ($rulePrecedence < $tokenPrecedence) {
-                                                // if the token precedence is higher, shift
+                                        } elseif ($rulePrecedence < $tokenPrecedence) {
+                                            // if the token precedence is higher, shift
                                                 // (i.e. don't modify the table)
                                             } else {
-                                                // precedences are equal, let's turn to associativity
+                                            // precedences are equal, let's turn to associativity
                                                 $assoc = $operatorInfo['assoc'];
 
-                                                if ($assoc === Grammar::RIGHT) {
-                                                    // if right-associative, shift
+                                            if ($assoc === Grammar::RIGHT) {
+                                                // if right-associative, shift
                                                     // (i.e. don't modify the table)
                                                 } elseif ($assoc === Grammar::LEFT) {
-                                                    // if left-associative, reduce
+                                                // if left-associative, reduce
                                                     $table['action'][$num][$token] = -$ruleNumber;
-                                                } elseif ($assoc === Grammar::NONASSOC) {
-                                                    // the token is nonassociative.
+                                            } elseif ($assoc === Grammar::NONASSOC) {
+                                                // the token is nonassociative.
                                                     // this actually means an input error, so
                                                     // remove the shift entry from the table
                                                     // and mark this as an explicit error
                                                     // entry
                                                     unset($table['action'][$num][$token]);
-                                                    $errors[$num][$token] = true;
-                                                }
+                                                $errors[$num][$token] = true;
                                             }
-
-                                            continue; // resolved the conflict, phew
                                         }
 
-                                        // we couldn't calculate the precedence => the conflict was not resolved
-                                        // move along.
-                                    }
+                                        continue; // resolved the conflict, phew
+                                        }
+                                    // we couldn't calculate the precedence => the conflict was not resolved
+                                    // move along.
                                 }
 
                                 // s/r
-                                if ($conflictsMode & Grammar::SHIFT) {
+                                if (($conflictsMode & Grammar::SHIFT) !== 0) {
                                     $conflicts[] = array(
                                         'state' => $num,
                                         'lookahead' => $token,
@@ -373,7 +365,7 @@ class Analyzer
                                 $originalRule = $grammar->getRule(-$instruction);
                                 $newRule = $item->getRule();
 
-                                if ($conflictsMode & Grammar::LONGER_REDUCE) {
+                                if (($conflictsMode & Grammar::LONGER_REDUCE) !== 0) {
 
                                     $count1 = is_countable($originalRule->getComponents()) ? count($originalRule->getComponents()) : 0;
                                     $count2 = is_countable($newRule->getComponents()) ? count($newRule->getComponents()) : 0;
@@ -406,7 +398,7 @@ class Analyzer
                                     }
                                 }
 
-                                if ($conflictsMode & Grammar::EARLIER_REDUCE) {
+                                if (($conflictsMode & Grammar::EARLIER_REDUCE) !== 0) {
                                     if (-$instruction < $ruleNumber) {
                                         // original rule was earlier
                                         $resolvedRules = array($originalRule, $newRule);

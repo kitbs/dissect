@@ -19,7 +19,7 @@ class AutomatonDumper
     /**
      * Constructor.
      *
-     * @param \Dissect\Parser\LALR1\Analysis\Automaton $automaton
+     * @param Automaton $automaton
      */
     public function __construct(Automaton $automaton)
     {
@@ -149,11 +149,7 @@ class AutomatonDumper
         // the dot
         array_splice($components, $item->getDotIndex(), 0, array('&bull;'));
 
-        if ($rule->getNumber() === 0) {
-            $string = '';
-        } else {
-            $string = sprintf("%s &rarr; ", $rule->getName());
-        }
+        $string = $rule->getNumber() === 0 ? '' : sprintf("%s &rarr; ", $rule->getName());
 
         $string .= implode(' ', $components);
 

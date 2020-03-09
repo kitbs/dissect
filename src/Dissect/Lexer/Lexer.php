@@ -2,6 +2,7 @@
 
 namespace Dissect\Lexer;
 
+use Dissect\Lexer\Exception\RecognitionException;
 use Dissect\Lexer\TokenStream\TokenStream;
 
 /**
@@ -17,7 +18,7 @@ interface Lexer
      *
      * @param string $string The string to lex.
      *
-     * @throws \Dissect\Lexer\Exception\RecognitionException
+     * @throws RecognitionException
      * When unable to extract more tokens from the string.
      *
      * @return \Dissect\Lexer\TokenStream\TokenStream The resulting token stream.

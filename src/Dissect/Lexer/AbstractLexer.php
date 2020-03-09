@@ -46,14 +46,14 @@ abstract class AbstractLexer implements Lexer
      *
      * @param string $string The string to extract the token from.
      *
-     * @return \Dissect\Lexer\Token|null The extracted token or null.
+     * @return Token|null The extracted token or null.
      */
     abstract protected function extractToken(string $string): ?Token;
 
     /**
      * Should given token be skipped?
      *
-     * @param \Dissect\Lexer\Token $token The token to evaluate.
+     * @param Token $token The token to evaluate.
      *
      * @return boolean Whether to skip the token.
      */

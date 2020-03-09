@@ -11,19 +11,22 @@ use LogicException;
  */
 class Grammar
 {
+    public $nonterminals;
     /**
      * The name given to the rule the grammar is augmented with
      * when start() is called.
+     * @var string
      */
     const START_RULE_NAME = '$start';
 
     /**
      * The epsilon symbol signifies an empty production.
+     * @var string
      */
     const EPSILON = '$epsilon';
 
     /**
-     * @var \Dissect\Parser\Rule[]
+     * @var Rule[]
      */
     protected $rules = array();
 
@@ -48,7 +51,7 @@ class Grammar
     protected $currentNonterminal;
 
     /**
-     * @var \Dissect\Parser\Rule
+     * @var Rule
      */
     protected $currentRule;
 
@@ -60,17 +63,19 @@ class Grammar
     /**
      * @var array
      */
-    protected $currentOperators;
+    protected $currentOperators = [];
 
     /**
      * Signifies that the parser should not resolve any
      * grammar conflicts.
+     * @var int
      */
     const NONE = 0;
 
     /**
      * Signifies that the parser should resolve
      * shift/reduce conflicts by always shifting.
+     * @var int
      */
     const SHIFT = 1;
 
@@ -78,6 +83,7 @@ class Grammar
      * Signifies that the parser should resolve
      * reduce/reduce conflicts by reducing with
      * the longer rule.
+     * @var int
      */
     const LONGER_REDUCE = 2;
 
@@ -86,6 +92,7 @@ class Grammar
      * reduce/reduce conflicts by reducing
      * with the rule that was given earlier in
      * the grammar.
+     * @var int
      */
     const EARLIER_REDUCE = 4;
 
@@ -93,27 +100,32 @@ class Grammar
      * Signifies that the conflicts should be
      * resolved by taking operator precendence
      * into account.
+     * @var int
      */
     const OPERATORS = 8;
 
     /**
      * Signifies that the parser should automatically
      * resolve all grammar conflicts.
+     * @var int
      */
     const ALL = 15;
 
     /**
      * Left operator associativity.
+     * @var int
      */
     const LEFT = 0;
 
     /**
      * Right operator associativity.
+     * @var int
      */
     const RIGHT = 1;
 
     /**
      * The operator is nonassociative.
+     * @var int
      */
     const NONASSOC = 2;
 
@@ -145,10 +157,11 @@ class Grammar
 
         $rule = new Rule($num, $this->currentNonterminal, func_get_args());
 
-        $this->rules[$num] =
-            $this->currentRule =
-            $this->groupedRules[$this->currentNonterminal][] =
-            $rule;
+        $this->rules[$num] = $this->groupedRules[$this->currentNonterminal][] =
+        $rule;
+        $this->currentRule =
+        $this->groupedRules[$this->currentNonterminal][] =
+        $rule;
 
         return $this;
     }
@@ -176,7 +189,7 @@ class Grammar
     /**
      * Returns the set of rules of this grammar.
      *
-     * @return \Dissect\Parser\Rule[] The rules.
+     * @return Rule[] The rules.
      */
     public function getRules()
     {
@@ -221,7 +234,7 @@ class Grammar
     /**
      * Returns the augmented start rule. For internal use only.
      *
-     * @return \Dissect\Parser\Rule The start rule.
+     * @return Rule The start rule.
      */
     public function getStartRule()
     {
@@ -328,7 +341,7 @@ class Grammar
      */
     public function assoc($a)
     {
-        if (!$this->currentOperators) {
+        if ($this->currentOperators === []) {
             throw new LogicException('Define a group of operators first.');
         }
 
@@ -350,7 +363,7 @@ class Grammar
      */
     public function prec($i)
     {
-        if (!$this->currentOperators) {
+        if ($this->currentOperators === []) {
             if (!$this->currentRule) {
                 throw new LogicException('Define a group of operators or a rule first.');
             } else {

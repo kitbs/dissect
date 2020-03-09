@@ -22,12 +22,14 @@ class StatefulLexer extends AbstractLexer
 
     /**
      * Signifies that no action should be taken on encountering a token.
+     * @var int
      */
     const NO_ACTION = 0;
 
     /**
      * Indicates that a state should be popped of the state stack on
      * encountering a token.
+     * @var int
      */
     const POP_STATE = 1;
 
@@ -39,7 +41,7 @@ class StatefulLexer extends AbstractLexer
      * @param string $type The token type.
      * @param string $value The value to be recognized.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return SimpleLexer This instance for fluent interface.
      */
     public function token(string $type, string $value = null): self
     {
@@ -67,7 +69,7 @@ class StatefulLexer extends AbstractLexer
      * @param string $type The token type.
      * @param string $regex The regular expression used to match the token.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return SimpleLexer This instance for fluent interface.
      */
     public function regex(string $type, string $regex): self
     {
@@ -90,7 +92,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @param mixed $type ,... Unlimited number of token types.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return SimpleLexer This instance for fluent interface.
      */
     public function skip(): self
     {
@@ -108,7 +110,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @param string $state The new state name.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return SimpleLexer This instance for fluent interface.
      */
     public function state(string $state): self
     {
@@ -128,7 +130,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @param string $state The name of the starting state.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return SimpleLexer This instance for fluent interface.
      */
     public function start(string $state): self
     {
@@ -142,7 +144,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @param mixed $action The action to take.
      *
-     * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
+     * @return SimpleLexer This instance for fluent interface.
      */
     public function action($action): self
     {
@@ -175,16 +177,15 @@ class StatefulLexer extends AbstractLexer
             throw new LogicException("You must set a starting state before lexing.");
         }
 
-        $value = $type = $action = null;
+        $value = $action = null;
+        $type = $action = null;
         $state = $this->states[$this->stateStack[count($this->stateStack) - 1]];
 
         foreach ($state['recognizers'] as $t => $recognizer) {
-            if ($recognizer->match($string, $v)) {
-                if ($value === null || Util::stringLength($v) > Util::stringLength($value)) {
-                    $value = $v;
-                    $type = $t;
-                    $action = $state['actions'][$type];
-                }
+            if ($recognizer->match($string, $v) && ($value === null || Util::stringLength($v) > Util::stringLength($value))) {
+                $value = $v;
+                $type = $t;
+                $action = $state['actions'][$type];
             }
         }
 

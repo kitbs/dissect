@@ -2,6 +2,7 @@
 
 namespace Dissect\Console;
 
+use Dissect\Console\Command\DissectCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,7 +31,7 @@ class Application extends BaseApplication
     protected function getDefaultCommands()
     {
         $default = parent::getDefaultCommands();
-        $default[] = new Command\DissectCommand();
+        $default[] = new DissectCommand();
 
         return $default;
     }

@@ -96,7 +96,7 @@ EOT
             $automaton = $result->getAutomaton();
             $table = $result->getParseTable();
 
-            if ($conflicts) {
+            if ($conflicts !== []) {
                 foreach ($conflicts as $conflict) {
                     $output->writeln($this->formatConflict($conflict));
                 }
@@ -127,16 +127,16 @@ EOT
             } else {
                 $output->writeln('<info>Parse table written</info>');
             }
-        } catch(ConflictException $e) {
+        } catch(ConflictException $conflictException) {
             $output->writeln(array(
                 $formatter->formatBlock(
-                    explode("\n", $e->getMessage()),
+                    explode("\n", $conflictException->getMessage()),
                     'error',
                     true
                 ),
             ));
 
-            $automaton = $e->getAutomaton();
+            $automaton = $conflictException->getAutomaton();
         }
 
         if ($input->getOption('dfa')) {

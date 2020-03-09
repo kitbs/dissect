@@ -22,7 +22,7 @@ class Rule
     /**
      * @var string[]
      */
-    protected $components;
+    protected $components = [];
 
     /**
      * @var callable

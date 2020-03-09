@@ -2,6 +2,7 @@
 
 namespace Dissect\Node;
 
+use RuntimeException;
 use Countable;
 use IteratorAggregate;
 
@@ -35,7 +36,7 @@ interface Node extends Countable, IteratorAggregate
      *
      * @return \Dissect\Node\Node The child node specified by $name.
      *
-     * @throws \RuntimeException When no child node named $name exists.
+     * @throws RuntimeException When no child node named $name exists.
      */
     public function getNode($name);
 
@@ -76,7 +77,7 @@ interface Node extends Countable, IteratorAggregate
      * @param string $key The key.
      * @return mixed The attribute value.
      *
-     * @throws \RuntimeException When no attribute exists under $key.
+     * @throws RuntimeException When no attribute exists under $key.
      */
     public function getAttribute($key);
 

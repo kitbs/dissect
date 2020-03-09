@@ -2,6 +2,8 @@
 
 namespace Dissect\Lexer\TokenStream;
 
+use Dissect\Lexer\Token;
+use OutOfBoundsException;
 use Countable;
 use IteratorAggregate;
 
@@ -22,7 +24,7 @@ interface TokenStream extends Countable, IteratorAggregate
     /**
      * Retrieves the current token.
      *
-     * @return \Dissect\Lexer\Token The current token.
+     * @return Token The current token.
      */
     public function getCurrentToken();
 
@@ -32,9 +34,9 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @param int $n The look-ahead.
      *
-     * @throws \OutOfBoundsException If current position + $n is out of range.
+     * @throws OutOfBoundsException If current position + $n is out of range.
      *
-     * @return \Dissect\Lexer\Token The lookahead token.
+     * @return Token The lookahead token.
      */
     public function lookAhead($n);
 
@@ -43,9 +45,9 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @param int $n The position.
      *
-     * @throws \OutOfBoundsException If $n is out of range.
+     * @throws OutOfBoundsException If $n is out of range.
      *
-     * @return \Dissect\Lexer\Token The token at position $n.
+     * @return Token The token at position $n.
      */
     public function get($n);
 
@@ -54,7 +56,7 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @param int $n The position.
      *
-     * @throws \OutOfBoundsException If $n is out of range.
+     * @throws OutOfBoundsException If $n is out of range.
      */
     public function move($n);
 
@@ -63,14 +65,14 @@ interface TokenStream extends Countable, IteratorAggregate
      *
      * @param int $n The seek.
      *
-     * @throws \OutOfBoundsException If current position + $n is out of range.
+     * @throws OutOfBoundsException If current position + $n is out of range.
      */
     public function seek($n);
 
     /**
      * Moves the cursor to the next token.
      *
-     * @throws \OutOfBoundsException If at the end of the stream.
+     * @throws OutOfBoundsException If at the end of the stream.
      */
     public function next();
 }

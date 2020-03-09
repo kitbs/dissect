@@ -2,6 +2,8 @@
 
 namespace Dissect\Lexer;
 
+use Dissect\Lexer\TokenStream\TokenStream;
+
 /**
  * A lexer takes an input string and processes
  * it into a token stream.
@@ -20,5 +22,5 @@ interface Lexer
      *
      * @return \Dissect\Lexer\TokenStream\TokenStream The resulting token stream.
      */
-    public function lex($string);
+    public function lex(string $string): TokenStream;
 }

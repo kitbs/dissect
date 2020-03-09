@@ -41,7 +41,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function token($type, $value = null)
+    public function token(string $type, string $value = null): self
     {
         if ($this->stateBeingBuilt === null) {
             throw new LogicException("Define a lexer state first.");
@@ -69,7 +69,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function regex($type, $regex)
+    public function regex(string $type, string $regex): self
     {
         if ($this->stateBeingBuilt === null) {
             throw new LogicException("Define a lexer state first.");
@@ -92,7 +92,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function skip()
+    public function skip(): self
     {
         if ($this->stateBeingBuilt === null) {
             throw new LogicException("Define a lexer state first.");
@@ -110,7 +110,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function state($state)
+    public function state(string $state): self
     {
         $this->stateBeingBuilt = $state;
 
@@ -130,7 +130,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function start($state)
+    public function start(string $state): self
     {
         $this->stateStack[] = $state;
 
@@ -144,7 +144,7 @@ class StatefulLexer extends AbstractLexer
      *
      * @return \Dissect\Lexer\SimpleLexer This instance for fluent interface.
      */
-    public function action($action)
+    public function action($action): self
     {
         if ($this->stateBeingBuilt === null || $this->typeBeingBuilt === null) {
             throw new LogicException("Define a lexer state and type first.");
@@ -158,7 +158,7 @@ class StatefulLexer extends AbstractLexer
     /**
      * {@inheritDoc}
      */
-    protected function shouldSkipToken(Token $token)
+    protected function shouldSkipToken(Token $token): bool
     {
         $state = $this->states[$this->stateStack[count($this->stateStack) - 1]];
 
@@ -168,7 +168,7 @@ class StatefulLexer extends AbstractLexer
     /**
      * {@inheritDoc}
      */
-    protected function extractToken($string)
+    protected function extractToken(string $string): ?Token
     {
         if (empty($this->stateStack)) {
             throw new LogicException("You must set a starting state before lexing.");

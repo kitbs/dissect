@@ -3,6 +3,7 @@
 namespace Dissect\Lexer;
 
 use Dissect\Lexer\TokenStream\ArrayTokenStream;
+use Dissect\Lexer\TokenStream\TokenStream;
 use Dissect\Parser\Parser;
 
 /**
@@ -18,7 +19,7 @@ abstract class RegexLexer implements Lexer
     /**
      * {@inheritDoc}
      */
-    public function lex($string)
+    public function lex(string $string): TokenStream
     {
         static $regex;
 
@@ -59,14 +60,14 @@ abstract class RegexLexer implements Lexer
      *
      * @return array
      */
-    abstract protected function getCatchablePatterns();
+    abstract protected function getCatchablePatterns(): array;
 
     /**
      * The patterns corresponding to tokens to be skipped.
      *
      * @return array
      */
-    abstract protected function getNonCatchablePatterns();
+    abstract protected function getNonCatchablePatterns(): array;
 
     /**
      * Retrieves the token type.
@@ -75,5 +76,5 @@ abstract class RegexLexer implements Lexer
      *
      * @return string $type
      */
-    abstract protected function getType(&$value);
+    abstract protected function getType(string &$value): string;
 }

@@ -85,7 +85,7 @@ class SimpleLexer extends AbstractLexer
     /**
      * {@inheritDoc}
      */
-    protected function extractToken(?string $string): ?CommonToken
+    protected function extractToken(string $string): ?Token
     {
         $value = $type = null;
 

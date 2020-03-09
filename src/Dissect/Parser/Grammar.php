@@ -31,12 +31,12 @@ class Grammar
     /**
      * @var Rule[]
      */
-    protected $rules = array();
+    protected $rules = [];
 
     /**
      * @var array
      */
-    protected $groupedRules = array();
+    protected $groupedRules = [];
 
     /**
      * @var int
@@ -61,7 +61,7 @@ class Grammar
     /**
      * @var array
      */
-    protected $operators = array();
+    protected $operators = [];
 
     /**
      * @var array
@@ -231,7 +231,7 @@ class Grammar
      */
     public function start($name): void
     {
-        $this->rules[0] = new Rule(0, self::START_RULE_NAME, array($name));
+        $this->rules[0] = new Rule(0, self::START_RULE_NAME, [$name]);
     }
 
     /**
@@ -296,10 +296,10 @@ class Grammar
         $this->currentOperators = $ops;
 
         foreach ($ops as $op) {
-            $this->operators[$op] = array(
-                'prec' => 1,
+            $this->operators[$op] = [
+                'prec'  => 1,
                 'assoc' => self::LEFT,
-            );
+            ];
         }
 
         return $this;

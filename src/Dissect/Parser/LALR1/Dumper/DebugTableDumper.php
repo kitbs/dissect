@@ -81,14 +81,14 @@ class DebugTableDumper implements TableDumper
     {
         $this->writer->writeLine('<?php');
         $this->writer->writeLine();
-        $this->writer->writeLine('return array(');
+        $this->writer->writeLine('return [');
         $this->writer->indent();
-        $this->writer->writeLine("'action' => array(");
+        $this->writer->writeLine("'action' => [");
     }
 
     protected function writeState($n, array $state): void
     {
-        $this->writer->writeLine((string)$n . ' => array(');
+        $this->writer->writeLine((string)$n . ' => [');
         $this->writer->indent();
 
         foreach ($state as $trigger => $action) {
@@ -97,7 +97,7 @@ class DebugTableDumper implements TableDumper
         }
 
         $this->writer->outdent();
-        $this->writer->writeLine('),');
+        $this->writer->writeLine('],');
     }
 
     protected function writeAction($trigger, $action): void
@@ -138,12 +138,12 @@ class DebugTableDumper implements TableDumper
     {
         $this->writer->writeLine('),');
         $this->writer->writeLine();
-        $this->writer->writeLine("'goto' => array(");
+        $this->writer->writeLine("'goto' => [");
     }
 
     protected function writeGoto($n, array $map): void
     {
-        $this->writer->writeLine((string)$n . ' => array(');
+        $this->writer->writeLine((string)$n . ' => [');
         $this->writer->indent();
 
         foreach ($map as $sym => $dest) {
@@ -163,13 +163,13 @@ class DebugTableDumper implements TableDumper
         }
 
         $this->writer->outdent();
-        $this->writer->writeLine('),');
+        $this->writer->writeLine('],');
     }
 
     protected function writeFooter(): void
     {
-        $this->writer->writeLine('),');
+        $this->writer->writeLine('],');
         $this->writer->outdent();
-        $this->writer->writeLine(');');
+        $this->writer->writeLine('];');
     }
 }

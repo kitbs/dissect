@@ -43,12 +43,12 @@ class Item
     /**
      * @var array
      */
-    protected $lookahead = array();
+    protected $lookahead = [];
 
     /**
      * @var array
      */
-    protected $connected = array();
+    protected $connected = [];
 
     /**
      * Constructor.

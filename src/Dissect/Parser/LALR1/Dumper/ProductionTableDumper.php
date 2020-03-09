@@ -42,19 +42,19 @@ class ProductionTableDumper implements TableDumper
 
     protected function writeIntro(StringWriter $writer): void
     {
-        $writer->write("<?php return array('action'=>array(");
+        $writer->write("<?php return ['action'=>[");
     }
 
     protected function writeState(StringWriter $writer, $num, $state): void
     {
-        $writer->write((string)$num . '=>array(');
+        $writer->write((string)$num . '=>[');
 
         foreach ($state as $trigger => $action) {
             $this->writeAction($writer, $trigger, $action);
             $writer->write(',');
         }
 
-        $writer->write(')');
+        $writer->write(']');
     }
 
     protected function writeAction(StringWriter $writer, $trigger, $action): void
@@ -68,12 +68,12 @@ class ProductionTableDumper implements TableDumper
 
     protected function writeMiddle(StringWriter $writer): void
     {
-        $writer->write("),'goto'=>array(");
+        $writer->write("],'goto'=>[");
     }
 
     protected function writeGoto(StringWriter $writer, $num, $map): void
     {
-        $writer->write((string)$num . '=>array(');
+        $writer->write((string)$num . '=>[');
 
         foreach ($map as $trigger => $destination) {
             $writer->write(sprintf(
@@ -85,11 +85,11 @@ class ProductionTableDumper implements TableDumper
             $writer->write(',');
         }
 
-        $writer->write(')');
+        $writer->write(']');
     }
 
     protected function writeOutro(StringWriter $writer): void
     {
-        $writer->write('));');
+        $writer->write(']];');
     }
 }

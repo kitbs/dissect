@@ -82,7 +82,7 @@ class AutomatonDumper
         $this->writeState($writer, $this->automaton->getState($n));
 
         $table = $this->automaton->getTransitionTable();
-        $row = $table[$n] ?? array();
+        $row = $table[$n] ?? [];
 
         foreach ($row as $dest) {
             if ($dest !== $n) {
@@ -130,7 +130,7 @@ class AutomatonDumper
 
         if ($full) {
             $string .= '\n\n';
-            $items = array();
+            $items = [];
 
             foreach ($state->getItems() as $item) {
                 $items[] = $this->formatItem($item);
@@ -150,7 +150,7 @@ class AutomatonDumper
         $components = $rule->getComponents();
 
         // the dot
-        array_splice($components, $item->getDotIndex(), 0, array('&bull;'));
+        array_splice($components, $item->getDotIndex(), 0, ['&bull;']);
 
         $string = $rule->getNumber() === 0 ? '' : sprintf("%s &rarr; ", $rule->getName());
 

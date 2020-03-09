@@ -11,8 +11,8 @@ class AutomatonTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->automaton = new Automaton();
-        $this->automaton->addState(new State(0, array()));
-        $this->automaton->addState(new State(1, array()));
+        $this->automaton->addState(new State(0, []));
+        $this->automaton->addState(new State(1, []));
     }
 
     /**
@@ -31,7 +31,7 @@ class AutomatonTest extends PHPUnit_Framework_TestCase
      */
     public function aNewStateShouldBeIdentifiedByItsNumber()
     {
-        $state = new State(2, array());
+        $state = new State(2, []);
         $this->automaton->addState($state);
 
         $this->assertSame($state, $this->automaton->getState(2));

@@ -28,11 +28,11 @@ abstract class RegexLexer implements Lexer
                 . implode('|', $this->getNonCatchablePatterns()) . '/i';
         }
 
-        $string = strtr($string, array("\r\n" => "\n", "\r" => "\n"));
+        $string = strtr($string, ["\r\n" => "\n", "\r" => "\n"]);
 
         $flags = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_OFFSET_CAPTURE;
         $matches = preg_split($regex, $string, -1, $flags);
-        $tokens = array();
+        $tokens = [];
         $line = 1;
         $oldPosition = 0;
 

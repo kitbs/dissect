@@ -18,11 +18,11 @@ class StatefulLexer extends AbstractLexer
     /**
      * @var mixed[]
      */
-    protected $states = array();
+    protected $states = [];
     /**
      * @var mixed[]
      */
-    protected $stateStack = array();
+    protected $stateStack = [];
     /**
      * @var string|null
      */
@@ -128,11 +128,11 @@ class StatefulLexer extends AbstractLexer
     {
         $this->stateBeingBuilt = $state;
 
-        $this->states[$state] = array(
-            'recognizers' => array(),
-            'actions' => array(),
-            'skip_tokens' => array(),
-        );
+        $this->states[$state] = [
+            'recognizers' => [],
+            'actions'     => [],
+            'skip_tokens' => [],
+        ];
 
         return $this;
     }

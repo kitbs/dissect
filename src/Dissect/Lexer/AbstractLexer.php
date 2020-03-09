@@ -64,9 +64,9 @@ abstract class AbstractLexer implements Lexer
      */
     public function lex($string): TokenStream
     {
-        $string = strtr($string, array("\r\n" => "\n", "\r" => "\n"));
+        $string = strtr($string, ["\r\n" => "\n", "\r" => "\n"]);
 
-        $tokens = array();
+        $tokens = [];
         $position = 0;
         $originalString = $string;
         $originalLength = Util::stringLength($string);

@@ -17,12 +17,12 @@ class SimpleLexer extends AbstractLexer
     /**
      * @var array
      */
-    protected $skipTokens = array();
+    protected $skipTokens = [];
 
     /**
      * @var array
      */
-    protected $recognizers = array();
+    protected $recognizers = [];
 
     /**
      * Adds a new token definition. If given only one argument,

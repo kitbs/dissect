@@ -65,13 +65,13 @@ EOT
         $output->writeln('');
 
         if (!class_exists($class)) {
-            $output->writeln(array(
+            $output->writeln([
                 $formatter->formatBlock(
                     sprintf('The class "%s" could not be found.', $class),
                     'error',
                     true
                 ),
-            ));
+            ]);
 
             return 1;
         }
@@ -128,13 +128,13 @@ EOT
                 $output->writeln('<info>Parse table written</info>');
             }
         } catch(ConflictException $conflictException) {
-            $output->writeln(array(
+            $output->writeln([
                 $formatter->formatBlock(
                     explode("\n", $conflictException->getMessage()),
                     'error',
                     true
                 ),
-            ));
+            ]);
 
             $automaton = $conflictException->getAutomaton();
         }
@@ -153,13 +153,13 @@ EOT
                 $state = (int)$input->getOption('state');
 
                 if (!$automaton->hasState($state)) {
-                    $output->writeln(array(
+                    $output->writeln([
                         $formatter->formatBlock(
                             sprintf('The automaton has no state #%d', $state),
                             'error',
                             true
                         ),
-                    ));
+                    ]);
 
                     return 1;
                 }

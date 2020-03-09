@@ -10,10 +10,10 @@ class ArithGrammar extends Grammar
     {
         $this('Expr*')
             ->is('Expr+')
-            
+
             ->is()
             ->call(function() {
-                return array();
+                return [];
             });
 
         $this('Expr+')
@@ -23,7 +23,7 @@ class ArithGrammar extends Grammar
 
                 return $list;
             })
-            
+
             ->is('Expr')
             ->call(function($argument) {
                 return array($argument);

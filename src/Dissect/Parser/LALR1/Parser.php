@@ -48,8 +48,8 @@ class Parser implements P\Parser
      */
     public function parse(TokenStream $stream)
     {
-        $stateStack = array($currentState = 0);
-        $args = array();
+        $stateStack = [$currentState = 0];
+        $args = [];
 
         foreach ($stream as $token) {
             while (true) {

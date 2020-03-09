@@ -13,12 +13,12 @@ class Automaton
     /**
      * @var array
      */
-    protected $states = array();
+    protected $states = [];
 
     /**
      * @var array
      */
-    protected $transitionTable = array();
+    protected $transitionTable = [];
 
     /**
      * Adds a new automaton state.

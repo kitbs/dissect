@@ -12,12 +12,12 @@ class State
     /**
      * @var array
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * @var array
      */
-    protected $itemMap = array();
+    protected $itemMap = [];
 
     /**
      * @var int

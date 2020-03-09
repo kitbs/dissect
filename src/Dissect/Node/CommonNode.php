@@ -33,7 +33,7 @@ class CommonNode implements Node
      * @param mixed[] $attributes
      * @param mixed[] $nodes
      */
-    public function __construct(array $attributes = array(), array $nodes = array())
+    public function __construct(array $attributes = [], array $nodes = [])
     {
         $this->attributes = $attributes;
         $this->nodes = $nodes;

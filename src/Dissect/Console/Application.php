@@ -41,10 +41,10 @@ class Application extends BaseApplication
 
     public function getDefinition(): \Symfony\Component\Console\Input\InputDefinition
     {
-        return new InputDefinition(array(
+        return new InputDefinition([
             new InputOption('--help',    '-h', InputOption::VALUE_NONE, 'Display this help message.'),
             new InputOption('--verbose', '-v', InputOption::VALUE_NONE, 'Increase verbosity of exceptions.'),
             new InputOption('--version', '-V', InputOption::VALUE_NONE, 'Display version information.'),
-        ));
+        ]);
     }
 }

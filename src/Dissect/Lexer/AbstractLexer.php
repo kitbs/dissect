@@ -105,6 +105,11 @@ abstract class AbstractLexer implements Lexer
         return new ArrayTokenStream($tokens);
     }
 
+    /**
+     * Define the tokens for the lexer.
+     *
+     * @return void
+     */
     protected function define(): void
     {
         //

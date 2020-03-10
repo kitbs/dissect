@@ -46,7 +46,7 @@ interface Node extends Countable, IteratorAggregate
      * @param string $name The name.
      * @param Node $node The new child node.
      */
-    public function setNode(string $name, Node $child);
+    public function setNode(string $name, Node $node);
 
     /**
      * Removes a child node by name.

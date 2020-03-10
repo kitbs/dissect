@@ -15,6 +15,7 @@ class Grammar
      * @var string[]
      */
     public $nonterminals;
+
     /**
      * The name given to the rule the grammar is augmented with
      * when start() is called.
@@ -132,6 +133,20 @@ class Grammar
      */
     const NONASSOC = 2;
 
+    /**
+     * Construct the class.
+     */
+    public function __construct()
+    {
+        $this->define();
+    }
+
+    /**
+     * Add a rule.
+     *
+     * @param  string $nonterminal
+     * @return self
+     */
     public function __invoke(string $nonterminal): self
     {
         return $this->rule($nonterminal);
@@ -208,7 +223,13 @@ class Grammar
         return $this->rules;
     }
 
-    public function getRule($number): Rule
+    /**
+     * Returns a rule of this grammar.
+     *
+     * @param  int $number
+     * @return Rule
+     */
+    public function getRule(int $number): Rule
     {
         return $this->rules[$number];
     }
@@ -238,7 +259,7 @@ class Grammar
      *
      * @param string The name of the start rule.
      */
-    public function start($name): void
+    public function start(string $name): void
     {
         $this->rules[0] = new Rule(0, self::START_RULE_NAME, [$name]);
     }
@@ -403,5 +424,15 @@ class Grammar
     public function getOperatorInfo($token)
     {
         return $this->operators[$token];
+    }
+
+    /**
+     * Define the rules for the grammar.
+     *
+     * @return void
+     */
+    protected function define(): void
+    {
+        //
     }
 }

@@ -80,13 +80,31 @@ class Parser implements P\Parser
                     $popCount = count($rule->getComponents());
 
                     $newArgs = $args;
+                    $keep = $rule->getKeep();
 
                     if ($popCount > 0) {
                         array_splice($stateStack, -$popCount);
                         $newArgs = array_splice($args, -$popCount);
+
+                        if (count($keep)) {
+                            $i = 0;
+                            $newArgs = array_filter($newArgs, function () use ($keep, &$i) {
+                                $i++;
+                                return in_array($i, $keep);
+                            });
+                        }
                     }
 
-                    $args[] = ($callback = $rule->getCallback()) ? call_user_func_array($callback, $newArgs) : $newArgs[0];
+                    if ($method = $rule->getMethod()) {
+                        $node = array_shift($newArgs);
+                        $args[] = $node->$method(...$newArgs);
+                    } elseif ($node = $rule->getNode()) {
+                        $args[] = new $node(...$newArgs);
+                    } elseif ($callback = $rule->getCallback()) {
+                        $args[] = $callback(...$newArgs);
+                    } else {
+                        $args[] = $newArgs[0];
+                    }
 
                     $state = $stateStack[count($stateStack) - 1];
                     $stateStack[] = $this->parseTable['goto']

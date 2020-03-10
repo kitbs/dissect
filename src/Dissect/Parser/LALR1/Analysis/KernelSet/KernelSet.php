@@ -14,6 +14,7 @@ class KernelSet
      * @var int
      */
     protected $nextNumber = 0;
+
     /**
      * @var Node|null
      */

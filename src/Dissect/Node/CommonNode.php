@@ -15,7 +15,7 @@ class CommonNode implements Node
     /**
      * @var Node[]
      */
-    public $nodes;
+    protected $nodes;
 
     /**
      * @var array
@@ -124,13 +124,27 @@ class CommonNode implements Node
         unset($this->attributes[$key]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function count(): int
     {
         return count($this->nodes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->nodes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function evaluate()
+    {
+        return $this->getAttribute('value');
     }
 }

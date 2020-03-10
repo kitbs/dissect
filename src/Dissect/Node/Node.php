@@ -95,4 +95,11 @@ interface Node extends Countable, IteratorAggregate
      * @param string $key The key.
      */
     public function removeAttribute(string $key);
+
+    /**
+     * Evaluate the node.
+     *
+     * @return mixed
+     */
+    public function evaluate();
 }

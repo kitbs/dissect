@@ -2,6 +2,8 @@
 
 namespace Dissect\Parser;
 
+use Closure;
+use Dissect\Node\Node;
 use LogicException;
 
 /**
@@ -45,9 +47,13 @@ class Grammar
     protected $nextRuleNumber = 1;
 
     /**
+     * The conflicts mode.
+     *
+     * SHIFT | OPERATORS
+     *
      * @var int
      */
-    protected $conflictsMode = 9; // SHIFT | OPERATORS
+    protected $conflictsMode = 9;
 
     /**
      * @var string
@@ -196,11 +202,11 @@ class Grammar
     /**
      * Sets the callback for the current rule.
      *
-     * @param callable $callback The callback.
+     * @param Closure $callback The callback.
      *
      * @return Grammar This instance.
      */
-    public function call(callable $callback): self
+    public function call(Closure $callback): self
     {
         if ($this->currentRule === null) {
             throw new LogicException(
@@ -209,6 +215,66 @@ class Grammar
         }
 
         $this->currentRule->setCallback($callback);
+
+        return $this;
+    }
+
+    /**
+     * Sets the node for the current rule.
+     *
+     * @param string|Node $node The node.
+     *
+     * @return Grammar This instance.
+     */
+    public function node($node): self
+    {
+        if ($this->currentRule === null) {
+            throw new LogicException(
+                'You must specify a rule first.'
+            );
+        }
+
+        $this->currentRule->setNode($node);
+
+        return $this;
+    }
+
+    /**
+     * Sets the node for the current rule.
+     *
+     * @param string $method The node method.
+     *
+     * @return Grammar This instance.
+     */
+    public function method(string $method): self
+    {
+        if ($this->currentRule === null) {
+            throw new LogicException(
+                'You must specify a rule first.'
+            );
+        }
+
+        $this->currentRule->setMethod($method);
+
+        return $this;
+    }
+
+    /**
+     * Sets the arguments to keep for the current rule.
+     *
+     * @param int[] $keep The arguments to keep.
+     *
+     * @return Grammar This instance.
+     */
+    public function keep(...$keep): self
+    {
+        if ($this->currentRule === null) {
+            throw new LogicException(
+                'You must specify a rule first.'
+            );
+        }
+
+        $this->currentRule->setKeep($keep);
 
         return $this;
     }
@@ -252,6 +318,17 @@ class Grammar
     public function getGroupedRules(): array
     {
         return $this->groupedRules;
+    }
+
+    /**
+     * Returns rule by nonterminal name.
+     *
+     * @param string $name
+     * @return array The rules grouped by nonterminal name.
+     */
+    public function getGroupedRule(string $name): array
+    {
+        return $this->groupedRules[$name];
     }
 
     /**
@@ -421,7 +498,13 @@ class Grammar
         return array_key_exists($token, $this->operators);
     }
 
-    public function getOperatorInfo($token)
+    /**
+     * Get the info for an operator.
+     *
+     * @param  string $token
+     * @return array
+     */
+    public function getOperatorInfo(string $token): array
     {
         return $this->operators[$token];
     }

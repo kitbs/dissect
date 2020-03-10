@@ -41,7 +41,7 @@ class CommonToken implements Token
     /**
      * {@inheritDoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

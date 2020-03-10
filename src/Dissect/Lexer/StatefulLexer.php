@@ -102,17 +102,17 @@ class StatefulLexer extends AbstractLexer
     /**
      * Marks the token types given as arguments to be skipped.
      *
-     * @param mixed $type ,... Unlimited number of token types.
+     * @param string ...$types Unlimited number of token types.
      *
      * @return SimpleLexer This instance for fluent interface.
      */
-    public function skip(): self
+    public function skip(...$types): self
     {
         if ($this->stateBeingBuilt === null) {
             throw new LogicException("Define a lexer state first.");
         }
 
-        $this->states[$this->stateBeingBuilt]['skip_tokens'] = func_get_args();
+        $this->states[$this->stateBeingBuilt]['skip_tokens'] = $types;
 
         return $this;
     }

@@ -153,11 +153,11 @@ class Grammar
     /**
      * Defines an alternative for a grammar rule.
      *
-     * @param string[] ...$args The components of the rule.
+     * @param string[] ...$components The components of the rule.
      *
      * @return Grammar This instance.
      */
-    public function is(...$args): self
+    public function is(...$components): self
     {
         $this->currentOperators = [];
 
@@ -169,7 +169,7 @@ class Grammar
 
         $num = $this->nextRuleNumber++;
 
-        $rule = new Rule($num, $this->currentNonterminal, $args);
+        $rule = new Rule($num, $this->currentNonterminal, $components);
 
         $this->rules[$num] = $rule;
         $this->groupedRules[$this->currentNonterminal][] = $rule;
@@ -292,19 +292,17 @@ class Grammar
     /**
      * Defines a group of operators.
      *
-     * @param string,... Any number of tokens that serve as the operators.
+     * @param string[] ...$operators Any number of tokens that serve as the operators.
      *
      * @return Grammar This instance for fluent interface.
      */
-    public function operators(): self
+    public function operators(...$operators): self
     {
         $this->currentRule = null;
 
-        $ops = func_get_args();
+        $this->currentOperators = $operators;
 
-        $this->currentOperators = $ops;
-
-        foreach ($ops as $op) {
+        foreach ($operators as $op) {
             $this->operators[$op] = [
                 'prec'  => 1,
                 'assoc' => self::LEFT,

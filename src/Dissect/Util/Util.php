@@ -14,11 +14,13 @@ abstract class Util
      *
      * {a, b} union {b, c} = {a, b, c}
      *
+     * @param array ...$sets The sets to merge.
+     *
      * @return array The union of given sets.
      */
-    public static function union(): array
+    public static function union(...$sets): array
     {
-        return array_unique(array_merge(...func_get_args()));
+        return array_unique(array_merge(...$sets));
     }
 
     /**

@@ -41,9 +41,9 @@ abstract class Util
      *
      * @return int The length.
      */
-    public static function stringLength(string $str): int
+    public static function stringLength(?string $str): int
     {
-        return strlen(utf8_decode($str));
+        return strlen(utf8_decode($str ?? ''));
     }
 
     /**

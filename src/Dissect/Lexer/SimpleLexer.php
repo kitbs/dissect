@@ -63,13 +63,13 @@ class SimpleLexer extends AbstractLexer
     /**
      * Marks the token types given as arguments to be skipped.
      *
-     * @param mixed $type ,... Unlimited number of token types.
+     * @param string[] ...$type Unlimited number of token types.
      *
      * @return $this This instance for fluent interface.
      */
-    public function skip(): self
+    public function skip(...$args): self
     {
-        $this->skipTokens = func_get_args();
+        $this->skipTokens = $args;
 
         return $this;
     }

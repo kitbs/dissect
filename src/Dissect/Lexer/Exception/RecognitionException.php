@@ -15,7 +15,12 @@ class RecognitionException extends RuntimeException
      * @var string
      */
     protected $parameter;
+
+    /**
+     * @var int
+     */
     protected $position;
+
     /**
      * @var int
      */

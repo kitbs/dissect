@@ -27,11 +27,11 @@ class CommonToken implements Token
     /**
      * Constructor.
      *
-     * @param mixed $type The type of the token.
-     * @param string $value The token value.
+     * @param string $type The type of the token.
+     * @param string|null $value The token value.
      * @param int $line The line.
      */
-    public function __construct($type, string $value, int $line)
+    public function __construct(string $type, ?string $value, int $line)
     {
         $this->type = $type;
         $this->value = $value;
@@ -49,7 +49,7 @@ class CommonToken implements Token
     /**
      * {@inheritDoc}
      */
-    public function getValue(): string
+    public function getValue(): ?string
     {
         return $this->value;
     }

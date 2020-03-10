@@ -136,7 +136,7 @@ class DebugTableDumper implements TableDumper
 
     protected function writeMiddle(): void
     {
-        $this->writer->writeLine('),');
+        $this->writer->writeLine('],');
         $this->writer->writeLine();
         $this->writer->writeLine("'goto' => [");
     }

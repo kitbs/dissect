@@ -114,7 +114,7 @@ class ArrayTokenStream implements TokenStream
      */
     public function count(): int
     {
-        return is_countable($this->tokens) ? count($this->tokens) : 0;
+        return count($this->tokens);
     }
 
     /**

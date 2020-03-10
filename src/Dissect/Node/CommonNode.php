@@ -2,6 +2,7 @@
 
 namespace Dissect\Node;
 
+use ArrayIterator;
 use RuntimeException;
 
 /**
@@ -131,7 +132,7 @@ class CommonNode implements Node
 
     public function count(): int
     {
-        return is_countable($this->children) ? count($this->children) : 0;
+        return count($this->children);
     }
 
     public function getIterator()

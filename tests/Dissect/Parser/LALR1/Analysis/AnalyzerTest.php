@@ -11,11 +11,6 @@ class AnalyzerTest extends TestCase
 {
     protected $analyzer = null;
 
-    public function setUp(): void
-    {
-        // $this->markTestSkipped('Skipped test');
-    }
-
     /**
      * @test
      */

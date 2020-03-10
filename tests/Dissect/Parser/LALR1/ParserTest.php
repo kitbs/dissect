@@ -12,7 +12,6 @@ class ParserTest extends TestCase
 
     public function setUp(): void
     {
-        $this->markTestSkipped('Skipped test');
         $this->lexer = new ArithLexer();
         $this->parser = new Parser(new ArithGrammar());
     }

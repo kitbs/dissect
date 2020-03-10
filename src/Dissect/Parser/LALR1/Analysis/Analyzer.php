@@ -88,8 +88,8 @@ class Analyzer
             // calculate closure
             $added = [];
             $currentItems = $state->getItems();
-            $currentItemsCount = count($currentItems);
-            for ($x = 0; $x < (is_countable($currentItems) ? $currentItemsCount : 0); $x++) {
+
+            for ($x = 0; $x < count($currentItems); $x++) {
                 $item = $currentItems[$x];
 
                 if (!$item->isReduceItem()) {
@@ -122,7 +122,7 @@ class Analyzer
                                 } else {
                                     // if it does
 
-                                    if ($i < ((is_countable($cs) ? count($cs) : 0) - 1)) {
+                                    if ($i < (count($cs) - 1)) {
                                         // if more components ahead, remove epsilon
                                         unset($new[array_search(Grammar::EPSILON, $new)]);
                                     }
@@ -367,8 +367,8 @@ class Analyzer
 
                                 if (($conflictsMode & Grammar::LONGER_REDUCE) !== 0) {
 
-                                    $count1 = is_countable($originalRule->getComponents()) ? count($originalRule->getComponents()) : 0;
-                                    $count2 = is_countable($newRule->getComponents()) ? count($newRule->getComponents()) : 0;
+                                    $count1 = count($originalRule->getComponents());
+                                    $count2 = count($newRule->getComponents());
 
                                     if ($count1 > $count2) {
                                         // original rule is longer
@@ -491,7 +491,7 @@ class Analyzer
                                     // if all components derive epsilon,
                                     // the rule itself derives epsilon
 
-                                    if ($i < ((is_countable($components) ? count($components) : 0) - 1)) {
+                                    if ($i < (count($components) - 1)) {
                                         // more components ahead, remove epsilon
                                         unset($x[array_search(Grammar::EPSILON, $x)]);
                                     }

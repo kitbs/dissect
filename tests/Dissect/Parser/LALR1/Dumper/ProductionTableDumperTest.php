@@ -7,11 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductionTableDumperTest extends TestCase
 {
-    public function setUp(): void
-    {
-        $this->markTestSkipped('Skipped test');
-    }
-
     /**
      * @test
      */

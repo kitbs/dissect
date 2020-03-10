@@ -11,8 +11,6 @@ class AutomatonDumperTest extends TestCase
 
     public function setUp(): void
     {
-        $this->markTestSkipped('Skipped test');
-
         $analyzer = new Analyzer();
         $automaton = $analyzer->analyze(new ExampleGrammar())->getAutomaton();
         $this->dumper = new AutomatonDumper($automaton);

@@ -30,7 +30,7 @@ class Rule
     protected $callback = null;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $precedence = null;
 
@@ -105,12 +105,12 @@ class Rule
         $this->callback = $callback;
     }
 
-    public function getCallback(): callable
+    public function getCallback(): ?callable
     {
         return $this->callback;
     }
 
-    public function getPrecedence(): int
+    public function getPrecedence(): ?int
     {
         return $this->precedence;
     }
